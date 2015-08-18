@@ -1,0 +1,32 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+body {    
+  font-family: Trebuchet MS, Lucida Sans Unicode,Lucida Grande,Lucida Sans;
+  background: url(/images/index.jpg);
+  background-size: 100%;  
+  color: #FFF; 
+}
+header{
+  margin-bottom: 0px;
+  padding-bottom: opx;
+}
+nav, footer{
+	text-align: center;
+}
+span{
+  margin-right: 20px;
+}
+h1{
+  font-size: 500%;
+  text-shadow:  crimson 8px 0px 10px, blue 15px 0px 10px;
+}
+h2,h3, nav{
+  font-size: 300%;
+  text-shadow: 5px 5px 10px #000, -5px -5px 10px #000, 10px 10px 10px #000, -10px -10px 10px #000;
+}
+a{
+  color:#fff;
+  text-decoration: none;
+}

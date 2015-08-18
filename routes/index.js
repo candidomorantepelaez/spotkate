@@ -1,14 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-var quizController= require('../controllers/spotkate_controller');
+var Controller= require('../controllers/spotkate_controller');
 
 /* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'SpotKate' });
-});
-
-router.get('/quizes/question', quizController.question);
-router.get('/quizes/answer', quizController.answer);
+router.get('/', Controller.index);
+router.get('/maps', Controller.maps);
+router.get('/spots', Controller.spots);
+router.get('/shops', Controller.shops);
 
 module.exports = router;

@@ -1,9 +1,15 @@
-//GET /quizes/question
-exports.question = function(req, res){
-	res.render('quizes/question', {pregunta:'Cual es tu nombre'});	
+exports.index = function(req, res){
+	res.render('index');
+}
+
+exports.spots = function(req, res){
+	res.render('spots/index');
 };
 
-//GET /quizes/answer
-exports.answer = function(req, res){
-	res.render('quizes/answer', {respuesta:req.query.respuesta});
+exports.shops = function(req, res){
+	res.render('shops/index');
 };
+
+exports.maps = function(req, res){
+	res.render('maps/index');
+}
