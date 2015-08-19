@@ -1,32 +1,47 @@
-*{
-  margin: 0px;
-  padding: 0px;
+* {
+  margin: 0;
+  padding: 0;
 }
-body {    
-  font-family: Trebuchet MS, Lucida Sans Unicode,Lucida Grande,Lucida Sans;
-  background: url(/images/index.jpg);
-  background-size: 100%;  
-  color: #FFF; 
+body {
+  background-image: url('/images/index.jpg');
+  background-size: 100%;
+  font: 16px Georgia, serif;  
 }
-header{
-  margin-bottom: 0px;
-  padding-bottom: opx;
+#page-wrap{
+  margin: 2% auto;
+  color: white;
 }
-nav, footer{
-	text-align: center;
+#page-wrap>.main{
+  border: 1px solid #999;
+  padding: 1%;
+  margin-bottom: 1px;
+  color: white;
 }
-span{
-  margin-right: 20px;
+section>div{
+  padding: 20px;
 }
-h1{
-  font-size: 500%;
+header, nav, section, footer{ 
+  text-align: center;
+}
+nav span{
+  margin: 0px 10px 0px 0px;
+}
+footer a{
+  margin: 0px 10px 0px 0px;
+}
+section{
+  color: white;
+  background-image: url('/images/lija1.gif');
+  background-size: 100%;
+  overflow-y: scroll;  
+}
+#ErrorMsgs{
+  color: #f61;
+  font-size: smaler;
+}
+h1 {  
   text-shadow:  crimson 8px 0px 10px, blue 15px 0px 10px;
 }
-h2,h3, nav{
-  font-size: 300%;
+h2,h3, nav { 
   text-shadow: 5px 5px 10px #000, -5px -5px 10px #000, 10px 10px 10px #000, -10px -10px 10px #000;
-}
-a{
-  color:#fff;
-  text-decoration: none;
 }
