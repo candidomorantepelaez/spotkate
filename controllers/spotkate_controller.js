@@ -1,9 +1,13 @@
+var models = require('../models/models.js');
+
 exports.index = function(req, res){
 	res.render('index');
 }
 
 exports.spots = function(req, res){
-	res.render('spots/index');
+	models.Spots.findAll().then(function(spot){
+	res.render('spots/index', {spots:spot[0].nombre});	
+	})
 };
 
 exports.shops = function(req, res){
