@@ -1,6 +1,10 @@
 <h2>Bienvenido a los spots</h2>
 <h2>Spots:</h2>
-<h2><%= spots %></h2>
+<table>
+<% var i; for(i=0; i<spots.length; i++) { %>
+	<tr><td><a href="spot/<%= spots[i].id %>"><%= spots[i].nombre %></a></td></tr>
+<% } %>
+</table>
 <p>bucador de spots por nombre o datos</p>
 <p>enlace a registrarte</p>
 <p>enlace a logearte</p>

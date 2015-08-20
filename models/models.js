@@ -42,6 +42,13 @@ sequelize.sync().then(function(){
 				tipo:'skatepark',
 				creado_por:'Kan'				
 			})
+			Spots.create({
+				nombre:'skatepark pericones',
+				direccion:'parque los pericones',
+				descripcion:'es un skatepark de cemento basado en rampas muy rudas',
+				tipo:'skatepark',
+				creado_por:'kan'
+			})
 			.then(function(){console.log('spots inicializados...')});
 		};
 	});
