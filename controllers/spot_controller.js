@@ -13,12 +13,12 @@ exports.load = function(req, res, next, spotId){
 //GET/spots lista los spots
 exports.spots = function(req, res){
 	models.Spots.findAll().then(function(spots){
-	res.render('spots/index', {spots:spots});	
+	res.render('spots/index', {spots:spots, errors:[]});	
 	});
 };
 //GET/spot/:spotId lista los datos de un spot
 exports.show = function(req, res){
-	res.render('spots/show', {spot:req.spot});	
+	res.render('spots/show', {spot:req.spot, errors:[]});	
 };
 //GET/spot/new
 exports.new = function(req, res){
@@ -29,14 +29,18 @@ exports.new = function(req, res){
 		tipo:'tipo',
 		creado_por:'creado_por'
 	});
-	res.render('spots/new', {spot:spot});
+	res.render('spots/new', {spot:spot, errors:[]});
 };
 //POST/spot/create
 exports.create = function(req, res){
 	var spot = models.Spots.build(req.body.spot);
 	//guarda en DB los campos del spot
-	spot.save({fields:["nombre", "direccion", "descripcion", "tipo", "creado_por"]})
+	spot.validate().then(function(err){
+		if(err){
+			res.render('spots/new', {spot:spot,errors:err.errors});
+		}else{
+		spot.save({fields:["nombre", "direccion", "descripcion", "tipo", "creado_por"]})
 	.then(function(){
-		res.redirect('/spots');
+		res.redirect('/spots');})}
 	});
 };
