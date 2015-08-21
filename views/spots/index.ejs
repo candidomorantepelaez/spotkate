@@ -2,7 +2,10 @@
 <h2>Spots:</h2>
 <table>
 <% var i; for(i=0; i<spots.length; i++) { %>
-	<tr><td><a href="spot/<%= spots[i].id %>"><%= spots[i].nombre %></a></td></tr>
+	<tr>
+		<td><a href="spot/<%= spots[i].id %>"><%= spots[i].nombre %></a></td>
+		<td><a href="spot/<%= spots[i].id %>/edit"><button>editar</button></a></td>		
+	</tr>
 <% } %>
 </table>
 <a href="/spot/new"><button type="button">Crea un Spot</button></a>

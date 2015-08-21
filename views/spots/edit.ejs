@@ -1,0 +1,18 @@
+<h2>Editar Spot</h2>
+<form method="post" action="/spot/<%= spot.id %>?_method=put">
+	<label for="nomsp" class="rem">Modifica el nombre:</label>
+	<input type="text" id="nomsp" name="spot[nombre]" value="<%= spot.nombre %>" required="true" size="60" maxlength="255"/><br>
+	<label for="dirsp" class="rem">Modifica la direccion:</label>
+	<input type="text" id="dirsp" name="spot[direccion]" value="<%= spot.direccion %>" required="true" size="60" maxlength="255"/><br>
+	<label for="dessp" class="rem">Modifica la descripcion:</label>
+	<input type="text" id="dessp" name="spot[descripcion]" value="<%= spot.descripcion %>" required="true" size="60" maxlength="255"/><br>
+	<label for="tisp" class="rem">skatepark o street:</label>
+	<select id="tisp" name="spot[tipo]" required="true">
+		<option value="skatepark" <% if (spot.tipo==='skatepark'){ %> selected <% } %> >Skatepark</option>
+		<option value="street" <% if (spot.tipo==='street'){ %> selected <% } %> >Street</option>
+	</select><br>
+	<label for="crpsp" class="rem">Dinos tu nick:</label>
+	<input type="text" id="crpsp" name="spot[creado_por]" placeholder="nick..." required="true" size="60" maxlength="255"/><br>
+	<a href="/spots"><button type="button">Cancelar</button></a>
+	<input type="submit" value="Modificar Spot">	
+</form>

@@ -13,10 +13,12 @@ router.get('/', Controller.index);
 router.get('/maps', MapsController.maps);
 
 //Rutas de Spots
-router.param(':spotsId', SpotController.load);//autoload de spots
+router.param('spotsId', SpotController.load);//autoload de spots
 router.get('/spots', SpotController.spots);
 router.get('/spot/new', SpotController.new);
 router.post('/spot/create', SpotController.create);
+router.get('/spot/:spotsId/edit', SpotController.edit);
+router.put('/spot/:spotsId', SpotController.update);
 router.get('/spot/:spotsId', SpotController.show);
 
 //Rutas de Shops

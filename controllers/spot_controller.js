@@ -44,3 +44,25 @@ exports.create = function(req, res){
 		res.redirect('/spots');})}
 	});
 };
+//GET/spot/:spotsId/edit
+exports.edit = function(req, res){
+	var spot = req.spot; //autoload de instancia de spot
+	res.render('spots/edit', {spot:spot, errors:[]});
+};
+//PUT/spot/:spotsId
+exports.update = function(req, res){
+	req.spot.nombre = req.body.spot.nombre;
+    req.spot.direccion = req.body.spot.direccion;
+	req.spot.descripcion = req.body.spot.descripcion;
+	req.spot.tipo = req.body.spot.tipo;
+	req.spot.creado_por=req.spot.creado_por +", modificado por "+ req.body.spot.creado_por;
+	
+	req.spot.validate().then(function(err){
+		if(err){
+			res.render('spots/edit', {spot:req.spot, errors:err.errors});
+		}else{
+			req.spot.save({fields:["nombre", "direccion", "descripcion", "tipo", "creado_por"]})
+			.then(function(){res.redirect('/spots');});
+		}
+	});
+};
