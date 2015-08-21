@@ -20,6 +20,7 @@ router.post('/spot/create', SpotController.create);
 router.get('/spot/:spotsId/edit', SpotController.edit);
 router.put('/spot/:spotsId', SpotController.update);
 router.get('/spot/:spotsId', SpotController.show);
+router.delete('/spot/:spotsId', SpotController.destroy);
 
 //Rutas de Shops
 router.get('/shops', ShopController.shops);

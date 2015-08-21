@@ -66,3 +66,9 @@ exports.update = function(req, res){
 		}
 	});
 };
+//DELETE/spot/:spotsId
+exports.destroy = function (req, res, next){
+	req.spot.destroy().then(function(){
+		res.redirect('/spots');
+	}).catch(function(error){next(error)});
+};

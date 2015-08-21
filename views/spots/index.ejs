@@ -4,7 +4,13 @@
 <% var i; for(i=0; i<spots.length; i++) { %>
 	<tr>
 		<td><a href="spot/<%= spots[i].id %>"><%= spots[i].nombre %></a></td>
-		<td><a href="spot/<%= spots[i].id %>/edit"><button>editar</button></a></td>		
+		<td><a href="spot/<%= spots[i].id %>/edit"><button>editar</button></a></td>
+		<td>
+			<form method="post" action="spot/<%= spots[i].id %>?_method=delete">
+				<button type="submit" onclick="return confirm('Seguro que quieres borrar: <%= spots[i].nombre %>')">
+				Borrar</button>
+				</form>
+			</td>		
 	</tr>
 <% } %>
 </table>
