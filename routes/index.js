@@ -23,6 +23,13 @@ router.get('/spot/:spotsId', SpotController.show);
 router.delete('/spot/:spotsId', SpotController.destroy);
 
 //Rutas de Shops
+router.param('shopsId', ShopController.load);//autoload de shops
 router.get('/shops', ShopController.shops);
+router.get('/shop/new', ShopController.new);
+router.post('/shop/create', ShopController.create);
+router.get('/shop/:shopsId/edit', ShopController.edit);
+router.put('/shop/:shopsId', ShopController.update);
+router.get('/shop/:shopsId', ShopController.show);
+router.delete('/shop/:shopsId', ShopController.destroy);
 
 module.exports = router;

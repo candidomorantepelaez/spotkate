@@ -26,9 +26,11 @@ var sequelize = new Sequelize(DB_name, user, pwd, {
 
 //importar la definicion de la tabla Quiz en quiz.js
 var Spots = sequelize.import(path.join(__dirname, 'spots'));
+var Shops = sequelize.import(path.join(__dirname, 'shops'));
 
 //exportar definicion de tabla spots
 exports.Spots = Spots;
+exports.Shops = Shops;
 
 //sequelize.sync crea e inicializa tabla de spots en DB
 sequelize.sync().then(function(){

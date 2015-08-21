@@ -1,0 +1,13 @@
+<h2>Editar Shop</h2>
+<form method="post" action="/shop/<%= shop.id %>?_method=put">
+	<label for="nomsh" class="rem">Modifica el nombre:</label>
+	<input type="text" id="nomshedit" name="shop[nombre]" value="<%= shop.nombre %>" required="true" size="60" maxlength="255"/><br>
+	<label for="dirsh" class="rem">Modifica la direccion:</label>
+	<input type="text" id="dirshedit" name="shop[direccion]" value="<%= shop.direccion %>" required="true" size="60" maxlength="255"/><br>
+	<label for="dessh" class="rem">Modifica la descripcion:</label>
+	<input type="text" id="desshedit" name="shop[descripcion]" value="<%= shop.descripcion %>" required="true" size="60" maxlength="255"/><br>
+	<label for="crpsh" class="rem">Dinos tu nick:</label>
+	<input type="text" id="crpshedit" name="shop[creado_por]" placeholder="nick..." required="true" size="60" maxlength="255"/><br>
+	<a href="/spots"><button type="button">Cancelar</button></a>
+	<input type="submit" value="Modificar Shop">	
+</form>

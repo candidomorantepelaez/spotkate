@@ -1,0 +1,13 @@
+<h2>Crea una Shop</h2>
+<form method="post" action="/shop/create">
+	<label for="nomsh" class="rem">Nombre de la tienda:</label>
+	<input type="text" id="nomsh" name="shop[nombre]" placeholder="nombre..." required="true" size="60" maxlength="255"/><br>
+	<label for="dirsh" class="rem">Dinos donde esta la tienda:</label>
+	<input type="text" id="dirsh" name="shop[direccion]" placeholder="direccion..." required="true" size="60" maxlength="255"/><br>
+	<label for="dessh" class="rem">Describenos la tienda:</label>
+	<input type="text" id="dessh" name="shop[descripcion]" placeholder="descripcion..." required="true" size="60" maxlength="255"/><br>
+	<label for="crpsh" class="rem">Dinos tu nick:</label>
+	<input type="text" id="crpsh" name="shop[creado_por]" placeholder="nick..." required="true" size="60" maxlength="255"/><br>
+	<a href="/spots"><button type="button">Cancelar</button></a>
+	<input type="submit" value="Crear Shop">	
+</form>

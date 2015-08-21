@@ -1,5 +1,20 @@
 <h2>Bienvenido a las tiendas</h1>
-<p>Mostrar tiendas mas recientes</p>
+<h2>Shops:</h2>
+<table>
+<% var i; for(i=0; i<shops.length; i++) { %>
+	<tr>
+		<td><a href="shop/<%= shops[i].id %>"><%= shops[i].nombre %></a></td>
+		<td><a href="shop/<%= shops[i].id %>/edit"><button>Editar</button></a></td>
+		<td>
+			<form method="post" action="shop/<%= shops[i].id %>?_method=delete">
+				<button type="submit" onclick="return confirm('Seguro que quieres borrar: <%= shops[i].nombre %>')">
+				Borrar</button>
+				</form>
+			</td>		
+	</tr>
+<% } %>
+</table>
+<a href="/shop/new"><button type="button">Crea una Shop</button></a>
 <p>buscador de tiendas por marca, zona o datos</p>
 <p>enlace a registrarte</p>
 <p>enlace a logearte</p>
