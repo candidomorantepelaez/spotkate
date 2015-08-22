@@ -7,9 +7,15 @@ var SpotController = require('../controllers/spot_controller');
 var ShopController = require('../controllers/shop_controller');
 var CommentSpot = require('../controllers/commentSpot_controller');
 var CommentShop = require('../controllers/commentShop_controller');
+var SessionController = require('../controllers/session_controller');
 
 /* GET home page. */
 router.get('/', Controller.index);
+
+//Rutas de sesion
+router.get('/login', SessionController.new); //formulario de login
+router.post('/login', SessionController.create); //crear sesion
+router.get('/logout', SessionController.destroy); //destruir sesion
 
 //Rutas de Maps
 router.get('/maps', MapsController.maps);
