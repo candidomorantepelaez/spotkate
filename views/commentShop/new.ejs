@@ -1,0 +1,7 @@
+<H2>Añadir Comentario</h2>
+<form method="post" action="/shop/<%= shopid %>/comments">
+	<input type="text" id="comShop" name="commentShop[texto]" placeholder="escribe aqui..."/><br>
+	<input type="text" id="creaComShop" name="commentShop[creado_por]" placeholder="tu nick..."/><br>
+	<button type="submit">Enviar Comentario</button>		
+</form>
+<a href="/shop/<%= shopid %>"><button>Cancelar</button></a>

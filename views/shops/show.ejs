@@ -3,6 +3,16 @@
 <p>Descripcion: <%= shop.descripcion %>.</p>
 <p>Creada por: <%= shop.creado_por %>.</p>
 <p>Creada el: <%= shop.createdAt %>.</p>
+<p><a href="/shop/<%= shop.id %>/comments/new"><button>Nuevo Comentario</button></a></p>
+<h2>Comentarios</h2>
+<table>
+	<% var i; for(i=0; i<shop.commentShops.length; i++) { %>
+		<tr>
+			<td>-- <%= shop.commentShops[i].comentario %></td>
+			<td>___Creado por: <%= shop.commentShops[i].creado_por %></td>
+		</tr>
+	<% } %>
+	</table>
 <h2><a href="/shops">volver</a></h2>
 <p>ver en el mapa como opcion</p>
 <p>Aqui estarian las fotos</p>

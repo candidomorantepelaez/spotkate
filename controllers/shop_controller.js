@@ -1,7 +1,10 @@
 var models = require('../models/models.js');
 //Autoload en caso de :shopId lo precarga y gestiona posibles errores
 exports.load = function(req, res, next, shopId){
-	models.Shops.findById(shopId).then(function(shop){
+	models.Shops.find({
+		where: {id: Number(shopId)},
+		include: [{model:models.CommentShop}]
+	}).then(function(shop){
 		if(shop){
 			req.shop = shop;
 			next();

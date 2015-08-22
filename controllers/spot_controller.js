@@ -1,7 +1,10 @@
 var models = require('../models/models.js');
 //Autoload en caso de :spotId lo precarga y gestiona posibles errores
 exports.load = function(req, res, next, spotId){
-	models.Spots.findById(spotId).then(function(spot){
+	models.Spots.find({
+		where: {id: Number(spotId)},
+		include:[{model:models.CommentSpot}]
+	}).then(function(spot){
 		if(spot){
 			req.spot = spot;
 			next();

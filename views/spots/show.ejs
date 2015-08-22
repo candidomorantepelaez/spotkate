@@ -4,6 +4,16 @@
 <p>Tipo: <%= spot.tipo %>.</p>
 <p>Creado por: <%= spot.creado_por %>.</p>
 <p>Creado el: <%= spot.createdAt %>.</p>
+<p><a href="/spot/<%= spot.id %>/comments/new"><button>Nuevo Comentario</button></a></p>
+<h2>Comentarios</h2>
+<table>
+	<% var i; for(i=0; i<spot.commentSpots.length; i++) { %>
+		<tr>
+			<td>-- <%= spot.commentSpots[i].comentario %></td>
+			<td>__Creado por: <%= spot.commentSpots[i].creado_por %></td>
+		</tr>
+	<% } %>
+</table>
 <h2><a href="/spots">volver</a></h2>
 <p>ver en el mapa como opcion</p>
 <p>Aqui estarian las fotos</p>
