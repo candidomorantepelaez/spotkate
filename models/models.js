@@ -51,23 +51,5 @@ exports.CommentShop = CommentShop;
 //sequelize.sync crea e inicializa tabla de spots en DB
 sequelize.sync().then(function(){
 	//then(..)ejecuta el manejador una vez creada la tabla
-	Spots.count().then(function(count){
-		if(count===0){//si la base de datos no tiene registros crea uno
-			Spots.create({
-				nombre:'skatepark el cerro',
-				direccion:'cimadevilla',
-				descripcion:'Es un skatepark de cemento, tiene una zona street y un bowl.',
-				tipo:'skatepark',
-				creado_por:'Kan'				
-			})
-			Spots.create({
-				nombre:'skatepark pericones',
-				direccion:'parque los pericones',
-				descripcion:'es un skatepark de cemento basado en rampas muy rudas',
-				tipo:'skatepark',
-				creado_por:'kan'
-			})
-			.then(function(){console.log('spots inicializados...')});
-		};
-	});
+	alert('creada base de datos');
 });
