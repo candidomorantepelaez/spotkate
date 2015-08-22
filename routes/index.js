@@ -23,29 +23,29 @@ router.get('/maps', MapsController.maps);
 //Rutas de Spots
 router.param('spotsId', SpotController.load);//autoload de spots
 router.get('/spots', SpotController.spots);
-router.get('/spot/new', SpotController.new);
-router.post('/spot/create', SpotController.create);
-router.get('/spot/:spotsId/edit', SpotController.edit);
-router.put('/spot/:spotsId', SpotController.update);
+router.get('/spot/new', SessionController.loginRequired, SpotController.new);
+router.post('/spot/create', SessionController.loginRequired, SpotController.create);
+router.get('/spot/:spotsId/edit', SessionController.loginRequired, SpotController.edit);
+router.put('/spot/:spotsId', SessionController.loginRequired, SpotController.update);
 router.get('/spot/:spotsId', SpotController.show);
-router.delete('/spot/:spotsId', SpotController.destroy);
+router.delete('/spot/:spotsId', SessionController.loginRequired, SpotController.destroy);
 
 //Rutas de CommentSpot
-router.get('/spot/:spotsId/comments/new', CommentSpot.new);
-router.post('/spot/:spotsId/comments', CommentSpot.create);
+router.get('/spot/:spotsId/comments/new',SessionController.loginRequired, SessionController.loginRequired, CommentSpot.new);
+router.post('/spot/:spotsId/comments',SessionController.loginRequired, SessionController.loginRequired, CommentSpot.create);
 
 //Rutas de Shops
 router.param('shopsId', ShopController.load);//autoload de shops
 router.get('/shops', ShopController.shops);
-router.get('/shop/new', ShopController.new);
-router.post('/shop/create', ShopController.create);
-router.get('/shop/:shopsId/edit', ShopController.edit);
-router.put('/shop/:shopsId', ShopController.update);
+router.get('/shop/new', SessionController.loginRequired, ShopController.new);
+router.post('/shop/create', SessionController.loginRequired, ShopController.create);
+router.get('/shop/:shopsId/edit', SessionController.loginRequired, ShopController.edit);
+router.put('/shop/:shopsId', SessionController.loginRequired, ShopController.update);
 router.get('/shop/:shopsId', ShopController.show);
-router.delete('/shop/:shopsId', ShopController.destroy);
+router.delete('/shop/:shopsId', SessionController.loginRequired, ShopController.destroy);
 
 //Rutas de CommentShop
-router.get('/shop/:shopsId/comments/new', CommentShop.new);
-router.post('/shop/:shopsId/comments', CommentShop.create);
+router.get('/shop/:shopsId/comments/new', SessionController.loginRequired, CommentShop.new);
+router.post('/shop/:shopsId/comments', SessionController.loginRequired, CommentShop.create);
 
 module.exports = router;

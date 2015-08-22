@@ -4,20 +4,22 @@
 <% var i; for(i=0; i<shops.length; i++) { %>
 	<tr>
 		<td><a href="shop/<%= shops[i].id %>"><%= shops[i].nombre %></a></td>
+		<% if(session.user){ %>
 		<td><a href="shop/<%= shops[i].id %>/edit"><button>Editar</button></a></td>
 		<td>
 			<form method="post" action="shop/<%= shops[i].id %>?_method=delete">
 				<button type="submit" onclick="return confirm('Seguro que quieres borrar: <%= shops[i].nombre %>')">
 				Borrar</button>
 				</form>
-			</td>		
+			</td>
+		<% } %>		
 	</tr>
 <% } %>
 </table>
+<% if(session.user){ %>
 <a href="/shop/new"><button type="button">Crea una Shop</button></a>
+<% } %>
 <p>buscador de tiendas por marca, zona o datos</p>
-<p>enlace a registrarte</p>
-<p>enlace a logearte</p>
 <p>busqueda de amigos(necesario registro)</p>
 <p>mi perfil(necesario registro)</p>
 <p>subir foto(necesario registro)</p>

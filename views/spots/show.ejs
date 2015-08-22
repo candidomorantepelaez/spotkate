@@ -4,7 +4,9 @@
 <p>Tipo: <%= spot.tipo %>.</p>
 <p>Creado por: <%= spot.creado_por %>.</p>
 <p>Creado el: <%= spot.createdAt %>.</p>
+<% if(session.user){ %>
 <p><a href="/spot/<%= spot.id %>/comments/new"><button>Nuevo Comentario</button></a></p>
+<% } %>
 <h2>Comentarios</h2>
 <table>
 	<% var i; for(i=0; i<spot.commentSpots.length; i++) { %>

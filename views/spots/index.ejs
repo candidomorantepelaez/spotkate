@@ -4,19 +4,21 @@
 <% var i; for(i=0; i<spots.length; i++) { %>
 	<tr>
 		<td><a href="spot/<%= spots[i].id %>"><%= spots[i].nombre %></a></td>
+		<% if(session.user){ %>
 		<td><a href="spot/<%= spots[i].id %>/edit"><button>editar</button></a></td>
 		<td>
 			<form method="post" action="spot/<%= spots[i].id %>?_method=delete">
 				<button type="submit" onclick="return confirm('Seguro que quieres borrar: <%= spots[i].nombre %>')">
 				Borrar</button>
 				</form>
-			</td>		
+			</td>
+		<% } %>		
 	</tr>
 <% } %>
 </table>
+<% if(session.user){ %>
 <a href="/spot/new"><button type="button">Crea un Spot</button></a>
+<% } %>
 <p>bucador de spots por nombre o datos</p>
-<p>enlace a registrarte</p>
-<p>enlace a logearte</p>
 <p>mi perfil(necesario registro)</p>
 <p>subir foto(necesario registro)</p>
