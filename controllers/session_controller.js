@@ -15,21 +15,19 @@ exports.new = function(req, res){
 };
 
 //POST/login --crea la sesion
-exports.create = function(req, res){
+exports.create = function(req, res){	
 	var login = req.body.login;
-	var password = req.body.password;
-	
+	var password = req.body.password;		
 	var userController = require('./user_controller');
-	userController.autenticar(login, password, function(error, user){
+	userController.autenticar(login, password, function(error, user){		
 		if(error){//si hay errores retornamos mensajes de error de sesion
 			req.session.errors = [{"message":'Se ha producido un error: '+error}];
 			res.redirect("/login");
 			return;
-		}
+		}		
 		//Crear req.sesion.user y guardar campos id y username
 		//La sesion se define por la existencia de : req.session.user
-		req.session.user = {id:user.id, username:user.username};
-		
+		req.session.user = {id:user.id, username:user.username};		
 		res.redirect(req.session.redir.toString());//redireccion a path anterior a login
 	});
 };

@@ -24,11 +24,24 @@ var sequelize = new Sequelize(DB_name, user, pwd, {
 								storage:storage, //solo SQlite(.env)
 								omitNull:true}); //solo Postgres
 
-//importar la definicion de la tabla Quiz en quiz.js
+//importar la definiciones de las tablas
 var Spots = sequelize.import(path.join(__dirname, 'spots'));
 var Shops = sequelize.import(path.join(__dirname, 'shops'));
 var CommentSpot = sequelize.import(path.join(__dirname, 'commentSpot'));
 var CommentShop = sequelize.import(path.join(__dirname, 'commentShop'));
+var User = sequelize.import(path.join(__dirname, 'user'));
+
+//relaciones de bases de datos user y spots
+Spots.belongsTo(User);
+User.hasMany(Spots);
+
+//relaciones entre bases de datos user y commentSpot
+CommentSpot.belongsTo(User);
+User.hasMany(CommentSpot);
+
+//relaciones entre bases de datos user y commentShop
+CommentShop.belongsTo(User);
+User.hasMany(CommentShop);
 
 //Relaciones de bases de datos Spots y CommentSpot
 CommentSpot.belongsTo(Spots);
@@ -47,9 +60,27 @@ exports.Spots = Spots;
 exports.Shops = Shops;
 exports.CommentSpot = CommentSpot;
 exports.CommentShop = CommentShop;
+exports.User = User;
 
 //sequelize.sync crea e inicializa tabla de spots en DB
 sequelize.sync().then(function(){
 	//then(..)ejecuta el manejador una vez creada la tabla
-	alert('creada base de datos');
+	User.count().then(function(count){
+		if(count === 0) { //la tabla se inicializa solo si esta vacia
+			User.bulkCreate([{username:'admin', password:'1234', isAdmin:true},
+				{username:'manolo', password:'4567'}]).then(function(){
+				console.log('Base de datos (tabla user) inicializada');
+				Spots.count().then(function(count){
+					if(count===0){
+						Spots.bulkCreate([{nombre:'el cerro', direccion:'cimadevilla', descripcion:'skatepark',
+							tipo:'skatepark', creado_por:'candido', UserId:1},
+							{nombre:'el nautico', direccion:'playa de san lorenzo', descripcion:'plaza de piedra', 
+								tipo:'street', creado_por:'candido', UserId:1}]).then(function(){
+								console.log('base de datos de spot inicializada');
+							});
+					};
+					});		
+			});			
+		};
+	});
 });
