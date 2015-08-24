@@ -1,0 +1,29 @@
+<h2>Busqueda de <%= busqueda %> </h2>
+<table>
+<% if(result!==0){ %>
+	<tr><td>Spots</td></tr> 
+	<% var i; for(i=0; i<result.length; i++) { %>
+	<tr>
+		<td><a href="spot/<%= result[i].id %>"><%= result[i].nombre %></a></td>				
+	</tr>
+	<% } %>
+<% } %>
+<% if(result1!==0){ %>
+	<tr><td>Shops</td></tr> 
+	<% var a; for(a=0; a<result1.length; a++) { %>
+	<tr>
+		<td><a href="shop/<%= result1[a].id %>"><%= result1[a].nombre %></a></td>
+	</tr>
+	<% } %>
+<% } %>
+<% if(result2!==0){ %>
+	<tr><td>Usuarios</td></tr> 
+	<% var b; for(b=0; b<result2.length; b++) { %>
+	<tr>
+		<td><a href="user/<%= result2[b].id %>"><%= result2[b].username %></a></td>
+	</tr>
+	<% } %>
+<% } %>
+</table>
+<p>mi perfil(necesario registro)</p>
+<p>subir foto(necesario registro)</p>

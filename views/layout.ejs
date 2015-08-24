@@ -21,10 +21,21 @@
 				<% }else{ %>
 				<span class="right"> <%= session.user.username %> <a href="/logout">Logout</a></span>
 				<% } %>	
+				<a href="/spot/new"><button class="left" type="button">Crea un Spot</button></a>
 				<h1>SpotKate</h1>
-				<a href="/spot/new"><button class="left" type="button">Crea un Spot</button></a>				
+				<form method="get" action="/result">
+					<label for="bus" class="rem">Busqueda:</label>
+					<input type="text" name="search" placeholder="Escriba aqui">
+					<select name="donde">
+  				 		<option value="todos">En todo</option>
+ 		 				<option value="spot">En spots</option>
+ 		 				<option value="shop">En shops</option>
+ 		 				<option value="user">En usuarios</option> 		 				
+					</select>
+					<input type="submit" value="buscar">
+					</form>				
 				</header>
-			<nav class="main" id="n1" role="navigation">
+			<nav class="main" id="n1" role="navigation">				
 				<span><a href="/">Novedades</a></span>
 				<span><a href="/maps">Mapa</a></span>
 				<span><a href="/spots">Spots</a></span>

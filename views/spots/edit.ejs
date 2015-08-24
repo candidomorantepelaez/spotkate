@@ -2,8 +2,8 @@
 <form method="post" action="/spot/<%= spot.id %>?_method=put">
 	<label for="nomsp" class="rem">Modifica el nombre:</label>
 	<input type="text" id="nomspedit" name="spot[nombre]" value="<%= spot.nombre %>" required="true" size="60" maxlength="255"/><br>
-	<label for="dirsp" class="rem">Modifica la direccion:</label>
-	<input type="text" id="dirspedit" name="spot[direccion]" value="<%= spot.direccion %>" required="true" size="60" maxlength="255"/><br>
+	<label for="ciusp" class="rem">Modifica la ciudad:</label>
+	<input type="text" id="ciuspedit" name="spot[ciudad]" value="<%= spot.ciudad %>" required="true" size="60" maxlength="255"/><br>
 	<label for="dessp" class="rem">Modifica la descripcion:</label>
 	<input type="text" id="desspedit" name="spot[descripcion]" value="<%= spot.descripcion %>" required="true" size="60" maxlength="255"/><br>
 	<label for="tisp" class="rem">skatepark o street:</label>

@@ -48,4 +48,7 @@ router.delete('/shop/:shopsId', SessionController.loginRequired, ShopController.
 router.get('/shop/:shopsId/comments/new', SessionController.loginRequired, CommentShop.new);
 router.post('/shop/:shopsId/comments', SessionController.loginRequired, CommentShop.create);
 
+//Rutas de Result
+router.get('/result', Controller.busqueda);
+
 module.exports = router;

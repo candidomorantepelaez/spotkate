@@ -72,9 +72,9 @@ sequelize.sync().then(function(){
 				console.log('Base de datos (tabla user) inicializada');
 				Spots.count().then(function(count){
 					if(count===0){
-						Spots.bulkCreate([{nombre:'el cerro', direccion:'cimadevilla', descripcion:'skatepark',
+						Spots.bulkCreate([{nombre:'el cerro', ciudad:'cimadevilla', descripcion:'skatepark',
 							tipo:'skatepark', creado_por:'candido', UserId:1},
-							{nombre:'el nautico', direccion:'playa de san lorenzo', descripcion:'plaza de piedra', 
+							{nombre:'el nautico', ciudad:'playa de san lorenzo', descripcion:'plaza de piedra', 
 								tipo:'street', creado_por:'candido', UserId:1}]).then(function(){
 								console.log('base de datos de spot inicializada');
 							});

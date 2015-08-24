@@ -27,7 +27,7 @@ exports.show = function(req, res){
 exports.new = function(req, res){
 	var spot = models.Spots.build({//crea un objeto
 		nombre:'nombre',
-		direccion:'direccion',
+		ciudad:'ciudad',
 		descripcion:'descripcion',
 		tipo:'tipo',
 		creado_por:'creado_por'
@@ -42,7 +42,7 @@ exports.create = function(req, res){
 		if(err){
 			res.render('spots/new', {spot:spot,errors:err.errors});
 		}else{
-		spot.save({fields:["nombre", "direccion", "descripcion", "tipo", "creado_por"]})
+		spot.save({fields:["nombre", "ciudad", "descripcion", "tipo", "creado_por"]})
 	.then(function(){
 		res.redirect('/spots');})}
 	});
@@ -55,7 +55,7 @@ exports.edit = function(req, res){
 //PUT/spot/:spotsId
 exports.update = function(req, res){
 	req.spot.nombre = req.body.spot.nombre;
-    req.spot.direccion = req.body.spot.direccion;
+    req.spot.ciudad = req.body.spot.ciudad;
 	req.spot.descripcion = req.body.spot.descripcion;
 	req.spot.tipo = req.body.spot.tipo;
 	req.spot.creado_por=req.spot.creado_por +", modificado por "+ req.body.spot.creado_por;
@@ -64,7 +64,7 @@ exports.update = function(req, res){
 		if(err){
 			res.render('spots/edit', {spot:req.spot, errors:err.errors});
 		}else{
-			req.spot.save({fields:["nombre", "direccion", "descripcion", "tipo", "creado_por"]})
+			req.spot.save({fields:["nombre", "ciudad", "descripcion", "tipo", "creado_por"]})
 			.then(function(){res.redirect('/spots');});
 		}
 	});

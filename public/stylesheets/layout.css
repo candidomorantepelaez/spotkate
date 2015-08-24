@@ -3,19 +3,17 @@
   padding: 0;
 }
 body {
-  background-image: url('/images/index.jpg');
-  background-size: 100%;
-  font: 16px Georgia, serif;  
+  background: white;
+  font: 16px Georgia, serif;
+    
 }
 #page-wrap{
   margin: 2% auto;
-  color: white;
-}
+}  
 #page-wrap>.main{
   border: 1px solid #999;
   padding: 1%;
-  margin-bottom: 1px;
-  color: white;
+  margin-bottom: 1px;  
 }
 section>div{
   padding: 20px;
@@ -29,19 +27,19 @@ nav span{
 footer a{
   margin: 0px 10px 0px 0px;
 }
-section{
-  color: white;
-  background-image: url('/images/lija1.gif');
-  background-size: 100%;
+section{  
   overflow-y: scroll;  
 }
 #ErrorMsgs{
   color: #f61;
   font-size: smaler;
 }
-h1 {  
-  text-shadow:  crimson 8px 0px 10px, blue 15px 0px 10px;
+.right{
+  float: right;
 }
-h2,h3, nav { 
-  text-shadow: 5px 5px 10px #000, -5px -5px 10px #000, 10px 10px 10px #000, -10px -10px 10px #000;
+.left{
+  float: left;
+}
+table{
+  margin: auto;
 }
