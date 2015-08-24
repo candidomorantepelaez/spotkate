@@ -67,15 +67,12 @@ sequelize.sync().then(function(){
 	//then(..)ejecuta el manejador una vez creada la tabla
 	User.count().then(function(count){
 		if(count === 0) { //la tabla se inicializa solo si esta vacia
-			User.bulkCreate([{username:'admin', password:'1234', isAdmin:true},
-				{username:'manolo', password:'4567'}]).then(function(){
+			User.create({username:'admin', password:'1234', isAdmin:true}).then(function(){
 				console.log('Base de datos (tabla user) inicializada');
 				Spots.count().then(function(count){
 					if(count===0){
-						Spots.bulkCreate([{nombre:'el cerro', ciudad:'cimadevilla', descripcion:'skatepark',
-							tipo:'skatepark', creado_por:'candido', UserId:1},
-							{nombre:'el nautico', ciudad:'playa de san lorenzo', descripcion:'plaza de piedra', 
-								tipo:'street', creado_por:'candido', UserId:1}]).then(function(){
+						Spots.create({nombre:'el cerro', ciudad:'cimadevilla', descripcion:'skatepark',
+							tipo:'skatepark', creado_por:'candido', UserId:1}).then(function(){
 								console.log('base de datos de spot inicializada');
 							});
 					};
