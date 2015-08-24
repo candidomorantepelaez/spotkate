@@ -75,9 +75,9 @@ sequelize.sync().then(function(){
 							tipo:'skatepark', creado_por:'candido', UserId:1}).then(function(){
 								console.log('base de datos de spot inicializada');
 							});
-					};
-					});		
+					}
+				});		
 			});			
-		};
+		}
 	});
 });
