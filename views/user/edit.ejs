@@ -1,0 +1,14 @@
+<h2>Editar informacion de Usuario:</h2>
+<form method="post" action="/user/<%= user.id %>?_method=put">
+	<label for="preg" class="rem">Username:</label><br>
+	<input type="text" id="usernameedit" name="user[username]" value="<%= user.username %>"><br>
+	<label for="res" class="rem">Password:</label><br>
+	<input type="password" id="passwordedit" name="user[password]"><br>
+	<a href="/"><button type="button">Cancelar</button></a>
+	<input type="submit" value="Modificar">
+</form>
+<form method="post" action="/user/<%= user.id %>?_method=delete">
+	<button type="submit" onClick="return confirm('Seguro que quieres borrar la cuenta');">
+	Eliminar Cuenta
+	</button>
+</form>

@@ -17,9 +17,15 @@
 		<div id="page-wrap">
 			<header class="main" id="h1">
 				<% if(!session.user){ %>
-				<span class="right"><a href="/login">Login</a></span>
+				<span class="right">
+					<a href="/user">Registrste</a>
+					-<a href="/login">Entra</a>
+				</span>
 				<% }else{ %>
-				<span class="right"> <%= session.user.username %> <a href="/logout">Logout</a></span>
+				<span class="right">
+					<%= session.user.username %>
+					-<a href="/user/<%= session.user.id %>/edit">Settings</a>
+					-<a href="/logout">Salir</a></span>
 				<% } %>	
 				<a href="/spot/new"><button class="left" type="button">Crea un Spot</button></a>
 				<h1>SpotKate</h1>
