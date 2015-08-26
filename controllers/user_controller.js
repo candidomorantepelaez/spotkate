@@ -11,7 +11,18 @@ exports.load = function(req, res, next, userId){
 		}
 	}).catch(function(error){next(error)});
 };
-
+//MW que permite acciones solo a admin o al usuario propio
+exports.ownershipRequired = function(req, res, next){
+	var objUser = req.user.id;
+	var logUser = req.session.user.id;
+	var isAdmin = req.session.user.isAdmin;
+	
+	if(isAdmin || objUser === logUser){
+		next();
+	}else{
+		res.redirect('/');
+	}
+};
 //Comprueba si el usuario esta registrado en users
 //si autenticacion falla o hay errores se ejecuta callback(error).
 exports.autenticar = function(login, password, callback){	

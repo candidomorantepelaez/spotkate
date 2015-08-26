@@ -35,6 +35,9 @@ var User = sequelize.import(path.join(__dirname, 'user'));
 Spots.belongsTo(User);
 User.hasMany(Spots);
 
+//relaciones entre bases de datos user y shops
+Shops.belongsTo(User);
+
 //relaciones entre bases de datos user y commentSpot
 CommentSpot.belongsTo(User);
 User.hasMany(CommentSpot);

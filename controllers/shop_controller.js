@@ -1,4 +1,5 @@
 var models = require('../models/models.js');
+
 //Autoload en caso de :shopId lo precarga y gestiona posibles errores
 exports.load = function(req, res, next, shopId){
 	models.Shops.find({
@@ -12,6 +13,27 @@ exports.load = function(req, res, next, shopId){
 			next(new Error('Esta tienda todavia no esta creada ¡ANIMATE y CREALA!!!'));
 		}
 	}).catch(function(error){next(error);});
+};
+//MW que permite al admin crear shop
+exports.adminRequired = function(req, res, next){	
+	var isAdmin = req.session.user.isAdmin;	
+	if(isAdmin){
+		next();
+	}else{
+		res.redirect('/');
+	}
+};
+//MW que permite acciones solo a admin o al creador del shop
+exports.ownershipRequired = function(req, res, next){
+	var objShopOwner = req.shop.UserId;
+	var logUser = req.session.user.id;
+	var isAdmin = req.session.user.isAdmin;
+	
+	if(isAdmin || objShopOwner===logUser){
+		next();
+	}else{
+		res.redirect('/');
+	}
 };
 //GET/shops lista los spots
 exports.shops = function(req, res){

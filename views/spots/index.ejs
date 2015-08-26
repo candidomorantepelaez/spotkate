@@ -4,7 +4,8 @@
 <% var i; for(i=0; i<spots.length; i++) { %>
 	<tr>
 		<td><a href="spot/<%= spots[i].id %>"><%= spots[i].nombre %></a></td>
-		<% if(session.user){ %>
+		<% if(session.user){ 
+			if(session.user.isAdmin || session.user.id === spots[i].UserId) {%>
 		<td><a href="spot/<%= spots[i].id %>/edit"><button>editar</button></a></td>
 		<td>
 			<form method="post" action="spot/<%= spots[i].id %>?_method=delete">
@@ -12,7 +13,7 @@
 				Borrar</button>
 				</form>
 			</td>
-		<% } %>		
+		<% } } %>		
 	</tr>
 <% } %>
 </table>

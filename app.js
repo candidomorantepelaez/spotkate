@@ -22,9 +22,13 @@ app.use(partials());
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({}));
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser('Spotkate 2015'));
-app.use(session());
+app.use(session({
+    secret:'cookie secret',
+    resave:true,
+    saveUninitialized:true    
+}));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 

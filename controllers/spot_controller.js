@@ -1,4 +1,5 @@
 var models = require('../models/models.js');
+
 //Autoload en caso de :spotId lo precarga y gestiona posibles errores
 exports.load = function(req, res, next, spotId){
 	models.Spots.find({
@@ -12,6 +13,18 @@ exports.load = function(req, res, next, spotId){
 			next(new Error('Este spot todavia no esta creado ¡ANIMATE y CREALO!!!'));
 		}
 	}).catch(function(error){next(error);});
+};
+//MW que permite acciones solo a admin o al creador del spot
+exports.ownershipRequired = function(req, res, next){
+	var objSpotOwner = req.spot.UserId;
+	var logUser = req.session.user.id;
+	var isAdmin = req.session.user.isAdmin;
+	
+	if(isAdmin || objSpotOwner === logUser){
+		next();
+	}else{
+		res.redirect('/');
+	}
 };
 //GET/spots lista los spots
 exports.spots = function(req, res){
