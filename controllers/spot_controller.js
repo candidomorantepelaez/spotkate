@@ -43,7 +43,8 @@ exports.new = function(req, res){
 		ciudad:'ciudad',
 		descripcion:'descripcion',
 		tipo:'tipo',
-		creado_por:'creado_por'
+		creado_por:'creado_por',
+		UserId:'UserId'
 	});
 	res.render('spots/new', {spot:spot, errors:[]});
 };
@@ -55,7 +56,7 @@ exports.create = function(req, res){
 		if(err){
 			res.render('spots/new', {spot:spot,errors:err.errors});
 		}else{
-		spot.save({fields:["nombre", "ciudad", "descripcion", "tipo", "creado_por"]})
+		spot.save({fields:["nombre", "ciudad", "descripcion", "tipo", "creado_por", "UserId"]})
 	.then(function(){
 		res.redirect('/spots');})}
 	});

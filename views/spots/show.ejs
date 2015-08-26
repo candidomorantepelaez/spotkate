@@ -11,8 +11,7 @@
 <table>
 	<% var i; for(i=0; i<spot.commentSpots.length; i++) { %>
 		<tr>
-			<td>-- <%= spot.commentSpots[i].comentario %></td>
-			<td>__Creado por: <%= spot.commentSpots[i].creado_por %></td>
+			<td><%= spot.commentSpots[i].creado_por %>:</td><td><%= spot.commentSpots[i].comentario %></td>
 		</tr>
 	<% } %>
 </table>

@@ -51,7 +51,8 @@ exports.new = function(req, res){
 		nombre:'nombre',
 		direccion:'direccion',
 		descripcion:'descripcion',
-		creado_por:'creado_por'
+		creado_por:'creado_por',
+		UserId:'UserId'
 	});
 	res.render('shops/new', {shop:shop, errors:[]});
 };
@@ -63,7 +64,7 @@ exports.create = function(req, res){
 		if(err){
 			res.render('shops/new', {shop:shop,errors:err.errors});
 		}else{
-		shop.save({fields:["nombre", "direccion", "descripcion", "creado_por"]})
+		shop.save({fields:["nombre", "direccion", "descripcion", "creado_por", "UserId"]})
 	.then(function(){
 		res.redirect('/shops');})}
 	});

@@ -8,9 +8,9 @@ exports.new = function(req, res){
 //POST/spot/:spotsId/comment
 exports.create = function(req, res, next){
 	var comment = models.CommentSpot.build({
-		comentario: req.body.commentSpot.texto,
-		creado_por: req.body.commentSpot.creado_por,
-		spotId: req.params.spotsId});
+		comentario: req.body.commentSpot.texto,		
+		spotId: req.params.spotsId,
+		creado_por: req.body.commentSpot.creado_por});
 	comment.validate().then(function(err){
 		if(err){
 			res.render('commentSpot/new', {comment:comment, errors:err.errors});

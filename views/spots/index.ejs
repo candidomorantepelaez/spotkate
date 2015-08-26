@@ -5,6 +5,8 @@
 	<tr>
 		<td><a href="spot/<%= spots[i].id %>"><%= spots[i].nombre %></a></td>
 		<% if(session.user){ 
+			console.log("session.user.id:"+session.user.id);
+			console.log("spots[i].UserId:"+spots[i].UserId);
 			if(session.user.isAdmin || session.user.id === spots[i].UserId) {%>
 		<td><a href="spot/<%= spots[i].id %>/edit"><button>editar</button></a></td>
 		<td>

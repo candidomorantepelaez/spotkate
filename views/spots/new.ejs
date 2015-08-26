@@ -13,6 +13,7 @@
 	</select><br>
 	<label for="crpsp" class="rem">Dinos tu nick:</label>
 	<input type="text" id="crpsp" name="spot[creado_por]" placeholder="nick..." required="true" size="60" maxlength="255"/><br>
+	<input type="text" id="sIsp" name="spot[UserId]" value="<%= session.user.id %>" hidden>
 	<a href="/spots"><button type="button">Cancelar</button></a>
 	<input type="submit" value="Crear Spot">	
 </form>

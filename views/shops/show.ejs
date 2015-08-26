@@ -10,8 +10,7 @@
 <table>
 	<% var i; for(i=0; i<shop.commentShops.length; i++) { %>
 		<tr>
-			<td>-- <%= shop.commentShops[i].comentario %></td>
-			<td>___Creado por: <%= shop.commentShops[i].creado_por %></td>
+			<td><%= shop.commentShops[i].creado_por %>:</td><td><%= shop.commentShops[i].comentario %></td>			
 		</tr>
 	<% } %>
 	</table>

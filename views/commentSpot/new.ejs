@@ -1,7 +1,7 @@
 <H2>Añadir Comentario</h2>
 <form method="post" action="/spot/<%= spotid %>/comments">
-	<input type="text" id="comSpot" name="commentSpot[texto]" placeholder="escribe aqui..."/><br>
-	<input type="text" id="creaComSpot" name="commentSpot[creado_por]" placeholder="tu nick..."/><br>
+	<input type="text" id="comSpot" name="commentSpot[texto]" placeholder="escribe aqui..."/><br>	
+	<input type="text" id="userIdspot" name="commentSpot[creado_por]" value="<%= session.user.username %>" hidden/>
 	<button type="submit">Enviar Comentario</button>	
 </form>
 <a href="/spot/<%= spotid %>"><button>Cancelar</button></a>
