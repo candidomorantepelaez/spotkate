@@ -1,9 +1,33 @@
 <h2>Editar informacion de Usuario:</h2>
 <form method="post" action="/user/<%= user.id %>?_method=put">
 	<label for="preg" class="rem">Username:</label><br>
-	<input type="text" id="usernameedit" name="user[username]" value="<%= user.username %>"><br>
+	<input type="text" id="usernameedit" name="user[username]" value="<%= user.username %>" required="true"><br>
 	<label for="res" class="rem">Password:</label><br>
-	<input type="password" id="passwordedit" name="user[password]"><br>
+	<input type="password" id="passwordedit1" name="user[password]" value="<%= user.password %>" required pattern="^([a-zA-Z0-9@*#]{6,15})$"><br>
+	<label for="res" class="rem">Repite el password:</label><br>
+	<input type="password" id="passwordedit2" name="comp[password]" required pattern="^([a-zA-Z0-9@*#]{6,15})$"><br>
+	<label for="preg" class="rem">Dinos en que ciudad patinas:</label><br>
+	<input type="text" id="ciudad" name="user[ciudad]" value="<%= user.ciudad %>"> <br>
+	<label for="res" class="rem">Dinos como te impulsas:</label><br>
+	<select id="userpush" name="user[push]">
+		<option value="regular" <% if(user.push ==="regular"){ %> selected <% } %>>Regular</option>
+		<option value="goofy" <% if(user.push ==="goofy"){ %> selected <% } %>>Goofy</option>
+	</select><br>
+	<label for="res" class="rem">Que prefires:</label><br>
+	<select id="usertipo" name="user[tipo]">
+		<option value="skatepark" <% if(user.tipo ==="skatepark"){ %> selected <% } %>>Skatepark</option>
+		<option value="street" <% if(user.tipo ==="street"){ %> selected <% } %>>Street</option>
+		<option value="pool" <% if(user.tipo ==="pool"){ %> selected <% } %>>Pool</option>
+	</select><br>
+	<label for="res" class="rem">Cual es tu setup favorito?</label>
+	<input type="text" id="tabla" name="user[tabla]" value="<%= user.tabla %>"><br>
+	<input type="text" id="ejes" name="user[ejes]" value="<%= user.ejes %>"><br>
+	<input type="text" id="ruedas" name="user[ruedas]" value="<%= user.ruedas %>"><br>
+	<input type="text" id="rodatas" name="user[rodatas]" value="<%= user.rodatas %>"><br>	
+	<label for="res" class="rem">Patinas para alguna marca o tienda, compartelo:</label><br>
+	<input type="text" id="rideFor" name="user[rideFor]" value="<%= user.rideFor %>"><br>
+	<label for="res" class="rem">Por ultimo dinos cual es tu truco preferido:</label><br>
+	<input type="text" id="trick" name="user[trick]" value="<%= user.trick %>"><br>
 	<a href="/"><button type="button">Cancelar</button></a>
 	<input type="submit" value="Modificar">
 </form>

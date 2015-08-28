@@ -1,5 +1,5 @@
 <h2>Crea un Spot</h2>
-<form method="post" action="/spot/create">
+<form method="post" action="/spot/create" >
 	<label for="nomsp" class="rem">Pon un nombre al spot:</label>
 	<input type="text" id="nomsp" name="spot[nombre]" placeholder="nombre..." required="true" size="60" maxlength="255"/><br>
 	<label for="ciusp" class="rem">Dinos donde esta el spot:</label>
@@ -10,9 +10,8 @@
 	<select id="tisp" name="spot[tipo]" required="true">
 		<option value="skatepark">Skatepark</option>
 		<option value="street">Street</option>
-	</select><br>
-	<label for="crpsp" class="rem">Dinos tu nick:</label>
-	<input type="text" id="crpsp" name="spot[creado_por]" placeholder="nick..." required="true" size="60" maxlength="255"/><br>
+	</select><br>	
+	<input type="text" id="crpsp" name="spot[creado_por]" value="<%= session.user.username %>" hidden/><br>
 	<input type="text" id="sIsp" name="spot[UserId]" value="<%= session.user.id %>" hidden>
 	<a href="/spots"><button type="button">Cancelar</button></a>
 	<input type="submit" value="Crear Spot">	

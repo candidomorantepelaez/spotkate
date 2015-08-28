@@ -4,6 +4,8 @@
 <p>Tipo: <%= spot.tipo %>.</p>
 <p>Creado por: <%= spot.creado_por %>.</p>
 <p>Creado el: <%= spot.createdAt %>.</p>
+<% console.log(spot.image); %>
+<p><img class="spot_img" src="/media/<%= spot.image %>"></p>
 <% if(session.user){ %>
 <p><a href="/spot/<%= spot.id %>/comments/new"><button>Nuevo Comentario</button></a></p>
 <% } %>

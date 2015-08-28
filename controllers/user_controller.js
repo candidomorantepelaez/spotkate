@@ -49,7 +49,8 @@ exports.edit = function(req, res){
 
 //GET/user
 exports.new = function(req, res){
-	var user = models.User.build({username:"", password:""});//crea el objeto user
+	var user = models.User.build({username:"", password:"", ciudad:"", push:"", tipo:"", tabla:"", ejes:"", 
+		ruedas:"", rodatas:"", rideFor:"", trick:""});//crea el objeto user
 	res.render('user/new', {user:user, errors:[]});
 };
 
@@ -61,7 +62,8 @@ exports.create = function(req, res, next){
 		if(err){
 			res.render('user/new', {user:user, errors:err.errors});
 		}else{
-			user.save({fields:["username", "password"]}).then(function(){
+			user.save({fields:["username", "password", "ciudad", "push", "tipo", "tabla",
+				"ejes", "ruedas", "rodatas", "rideFor", "trick" ]}).then(function(){
 				req.session.user = {id:user.id, username:user.username};
 				res.redirect('/');
 			});
@@ -73,12 +75,22 @@ exports.create = function(req, res, next){
 exports.update = function(req, res, next){
 	req.user.username = req.body.user.username;
 	req.user.password = req.body.user.password;
+	req.user.ciudad = req.body.user.ciudad;
+	req.user.push = req.body.user.push;
+	req.user.tipo = req.body.user.tipo;
+	req.user.tabla = req.body.user.tabla;
+	req.user.ejes = req.body.user.ejes;
+	req.user.ruedas = req.body.user.ruedas;
+	req.user.rodatas = req.body.user.rodatas;
+	req.user.rideFor = req.body.user.rideFor;
+	req.user.trick = req.body.user.trick;	
 	
 	req.user.validate().then(function(err){
 		if(err){
 			res.render('user/'+req.user.id, {user: req.user, errors:err.errors});
 		}else{
-			req.user.save({fields:["username", "password"]}).then(function(){
+			req.user.save({fields:["username", "password", "ciudad", "push", "tipo", "tabla", "ejes",
+				"ruedas", "rodatas", "rideFor", "trick"]}).then(function(){
 				res.redirect('/');//redireccion http a /
 			});
 		}

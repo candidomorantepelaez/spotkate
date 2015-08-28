@@ -1,5 +1,15 @@
 <h2><%= user.username %></h2>
 <p>Username: <%= user.username %>.</p>
+<% if(user.ciudad){ %><p>Ciudad: <%= user.ciudad %>.</p> <% } %>
+<% if(user.push){ %><p>Es: <%= user.push %>.</p> <% } %>
+<% if(user.tipo){ %><p>Prefiere patinar <%= user.tipo %>.</p> <% } %>
+<% if(user.tabla||user.ejes||user.ruedas||user.rodatas){ %><p>SetUp preferido:</p> <% } %>
+<% if(user.tabla){ %><p>Tabla: <%= user.tabla %>.</p> <% } %>
+<% if(user.ejes){ %><p>Ejes: <%= user.ejes %>.</p> <% } %>
+<% if(user.ruedas){ %><p>Ruedas: <%= user.ruedas %>.</p> <% } %>
+<% if(user.rodatas){ %><p>Rodatas: <%= user.rodatas %>.</p> <% } %>
+<% if(user.rideFor){ %><p>Patina para: <%= user.rideFor %>.</p> <% } %>
+<% if(user.trick){ %><p>Truco favorito: <%= user.trick %>.</p> <% } %>
 <p>Creado el: <%= user.createdAt %>.</p>
 <h2><a href="javascript:history.back()">volver</a></h2>
 <p>ver en el mapa como opcion</p>

@@ -10,3 +10,6 @@ body{
 footer, input{
 	font-size: large;
 }
+.spot_img{
+	float:none;
+}

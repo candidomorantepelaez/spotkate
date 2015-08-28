@@ -36,7 +36,16 @@ module.exports = function(sequelize, DataTypes){
 		isAdmin:{
 			type:DataTypes.BOOLEAN,
 			defaultValue: false
-		}
+		},
+		ciudad:{type:DataTypes.STRING},
+		push:{type:DataTypes.STRING},
+		tipo:{type:DataTypes.STRING},
+		tabla:{type:DataTypes.STRING},
+		ejes:{type:DataTypes.STRING},
+		ruedas:{type:DataTypes.STRING},
+		rodatas:{type:DataTypes.STRING},
+		rideFor:{type:DataTypes.STRING},
+		trick:{type:DataTypes.STRING}
 	},		
 	{
 		instanceMethods:{

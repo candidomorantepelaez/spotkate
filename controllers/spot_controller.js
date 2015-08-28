@@ -44,13 +44,14 @@ exports.new = function(req, res){
 		descripcion:'descripcion',
 		tipo:'tipo',
 		creado_por:'creado_por',
-		UserId:'UserId'
+		UserId:'UserId',
+		image:'image'
 	});
 	res.render('spots/new', {spot:spot, errors:[]});
 };
 //POST/spot/create
 exports.create = function(req, res){
-	var spot = models.Spots.build(req.body.spot);
+	var spot = models.Spots.build(req.body.spot);	
 	//guarda en DB los campos del spot
 	spot.validate().then(function(err){
 		if(err){

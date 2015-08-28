@@ -43,3 +43,7 @@ section{
 table{
   margin: auto;
 }
+.spot_img{
+  height: 200px;
+  float:left;
+}

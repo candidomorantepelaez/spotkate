@@ -10,6 +10,7 @@ module.exports=function(sequelize, DataTypes){
 		tipo: {type: DataTypes.STRING,
 				validate: {notEmpty:{msg:"el tipo no puede estar vacio"}}},			
 		creado_por: {type: DataTypes.STRING,
-				validate: {notEmpty:{msg:"el autor no puede quedar vacio"}}}		
-	})
+				validate: {notEmpty:{msg:"el autor no puede quedar vacio"}}},
+		image: {type: DataTypes.STRING}		
+	});
 };
