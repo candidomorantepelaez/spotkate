@@ -8,6 +8,8 @@ module.exports=function(sequelize, DataTypes){
 		descripcion: {type: DataTypes.TEXT,
 				validate: {notEmpty:{msg:"la descripcion no puede estar vacia"}}},				
 		creado_por: {type: DataTypes.STRING,
-				validate: {notEmpty:{msg:"el autor no puede quedar vacio"}}}		
+				validate: {notEmpty:{msg:"el autor no puede quedar vacio"}}},
+		creado_el:{type:DataTypes.STRING},
+		image:{type:DataTypes.STRING}		
 	})
 };

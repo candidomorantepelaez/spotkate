@@ -61,4 +61,10 @@ router.post('/shop/:shopsId/comments', SessionController.loginRequired, CommentS
 //Rutas de Result
 router.get('/result', Controller.busqueda);//Resultados de las busquedas
 
+//Rutas para subir fotos
+// indicamos que del fichero upload.js haga mención a la función upload, para cargar el formulario html
+router.get('/upload', Controller.upload); 
+// indicamos que del fichero upload.js haga mención a la función Uploads para subir la imagen.
+router.post('/upload', Controller.Uploads);
+
 module.exports = router;//exportamos las rutas 

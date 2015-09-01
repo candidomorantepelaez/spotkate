@@ -1,4 +1,5 @@
 var models = require('../models/models.js');
+var cloudinary = require('cloudinary');
 
 //Autoload en caso de :spotId lo precarga y gestiona posibles errores
 exports.load = function(req, res, next, spotId){
@@ -33,7 +34,7 @@ exports.spots = function(req, res){
 	});
 };
 //GET/spot/:spotId lista los datos de un spot
-exports.show = function(req, res){
+exports.show = function(req, res){	
 	res.render('spots/show', {spot:req.spot, errors:[]});	
 };
 //GET/spot/new
@@ -45,19 +46,28 @@ exports.new = function(req, res){
 		tipo:'tipo',
 		creado_por:'creado_por',
 		UserId:'UserId',
+		creado_el:'creado_el',
 		image:'image'
 	});
 	res.render('spots/new', {spot:spot, errors:[]});
 };
 //POST/spot/create
-exports.create = function(req, res){
-	var spot = models.Spots.build(req.body.spot);	
+exports.create = function(req, res){	
+	var hora = new Date();	
+	if(req.files.photo.name){		
+		var publicId = req.session.id + hora.getHours()+hora.getMinutes()+hora.getSeconds(); 
+		cloudinary.uploader.upload(req.files.photo.path,
+  		function(result) {},{public_id:publicId});
+		req.body.spot.image = publicId;
+	};	
+	req.body.spot.creado_el = hora.getDate() + "/" + (hora.getMonth() +1) + "/" + hora.getFullYear()+" a las "+hora.getHours()+":"+hora.getMinutes('mm');	
+	var spot = models.Spots.build(req.body.spot);
 	//guarda en DB los campos del spot
 	spot.validate().then(function(err){
 		if(err){
 			res.render('spots/new', {spot:spot,errors:err.errors});
 		}else{
-		spot.save({fields:["nombre", "ciudad", "descripcion", "tipo", "creado_por", "UserId"]})
+		spot.save({fields:["nombre", "ciudad", "descripcion", "tipo", "creado_por", "UserId", "image","creado_el"]})
 	.then(function(){
 		res.redirect('/spots');})}
 	});

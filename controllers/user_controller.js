@@ -1,4 +1,5 @@
 var models = require('../models/models.js');
+var cloudinary = require('cloudinary');
 
 //Autoload :userId
 exports.load = function(req, res, next, userId){
@@ -50,20 +51,27 @@ exports.edit = function(req, res){
 //GET/user
 exports.new = function(req, res){
 	var user = models.User.build({username:"", password:"", ciudad:"", push:"", tipo:"", tabla:"", ejes:"", 
-		ruedas:"", rodatas:"", rideFor:"", trick:""});//crea el objeto user
+		ruedas:"", rodatas:"", rideFor:"", trick:"", creado_el:""});//crea el objeto user
 	res.render('user/new', {user:user, errors:[]});
 };
 
 //POST/user
 exports.create = function(req, res, next){
-	var user = models.User.build(req.body.user);
-	
+	var hora = new Date();
+	req.body.user.creado_el = hora.getDate() + "/" + (hora.getMonth() +1) + "/" + hora.getFullYear() + " a las " + hora.getHours() + ":" + hora.getMinutes('mm');
+	if(req.files.photo.name){		
+		var publicId = req.session.id + hora.getHours()+hora.getMinutes()+hora.getSeconds(); 
+		cloudinary.uploader.upload(req.files.photo.path,
+  		function(result) {},{public_id:publicId});
+		req.body.user.image = publicId;
+	};	
+	var user = models.User.build(req.body.user);		
 	user.validate().then(function(err){
 		if(err){
 			res.render('user/new', {user:user, errors:err.errors});
 		}else{
 			user.save({fields:["username", "password", "ciudad", "push", "tipo", "tabla",
-				"ejes", "ruedas", "rodatas", "rideFor", "trick" ]}).then(function(){
+				"ejes", "ruedas", "rodatas", "rideFor", "trick", "creado_el", "image" ]}).then(function(){
 				req.session.user = {id:user.id, username:user.username};
 				res.redirect('/');
 			});

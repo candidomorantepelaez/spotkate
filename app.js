@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 var partials = require('express-partials');
 var methodOverride = require('method-override');
 var session = require('express-session');
+var fs = require('fs');
+var multipart = require('connect-multiparty');
+var cloudinary = require('cloudinary');
 
 var routes = require('./routes/index');
 
@@ -23,6 +26,7 @@ app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(multipart());
 app.use(cookieParser('Spotkate 2015'));
 app.use(session({
     secret:'cookie secret',

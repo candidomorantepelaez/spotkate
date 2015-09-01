@@ -1,5 +1,8 @@
 <h2><%= user.username %></h2>
 <p>Username: <%= user.username %>.</p>
+<% if(user.image){ %> 
+<p><img class="spot_img" src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= user.image %>"></p>
+<% } %>
 <% if(user.ciudad){ %><p>Ciudad: <%= user.ciudad %>.</p> <% } %>
 <% if(user.push){ %><p>Es: <%= user.push %>.</p> <% } %>
 <% if(user.tipo){ %><p>Prefiere patinar <%= user.tipo %>.</p> <% } %>
@@ -10,7 +13,7 @@
 <% if(user.rodatas){ %><p>Rodatas: <%= user.rodatas %>.</p> <% } %>
 <% if(user.rideFor){ %><p>Patina para: <%= user.rideFor %>.</p> <% } %>
 <% if(user.trick){ %><p>Truco favorito: <%= user.trick %>.</p> <% } %>
-<p>Creado el: <%= user.createdAt %>.</p>
+<p>Creado el: <%= user.creado_el %>.</p>
 <h2><a href="javascript:history.back()">volver</a></h2>
 <p>ver en el mapa como opcion</p>
 <p>Aqui estarian las fotos</p>

@@ -1,4 +1,5 @@
 var models = require('../models/models.js');
+var cloudinary = require('cloudinary');
 
 exports.index = function(req, res){
 	res.render('index',{errors:[]});
@@ -38,6 +39,24 @@ exports.busqueda=function(req, res){
 		}		
 	}
 };
+//Funciones para subir fotos de la pagina dbigcloud son dos funciones
+//funcion primera cargar el formulario
+exports.upload = function(req, res){			
+  res.render('foto/upload', {errors:[]});
+};
+
+//funcion dos la que recibe el post y guarda el archivo en nuestro ordenador
+// Importamos el modulo para subir ficheros
+
+
+exports.Uploads = function(req, res) { 	  
+    cloudinary.uploader.upload(req.files.photo.path,
+  		function(result) {
+			  console.log(result);
+			  res.render('foto/upload', {errors:[]});			  
+    });         
+};
+
 
 
 

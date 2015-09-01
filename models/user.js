@@ -45,7 +45,9 @@ module.exports = function(sequelize, DataTypes){
 		ruedas:{type:DataTypes.STRING},
 		rodatas:{type:DataTypes.STRING},
 		rideFor:{type:DataTypes.STRING},
-		trick:{type:DataTypes.STRING}
+		trick:{type:DataTypes.STRING},
+		creado_el:{type:DataTypes.STRING},
+		image:{type:DataTypes.STRING}
 	},		
 	{
 		instanceMethods:{

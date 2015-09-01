@@ -1,4 +1,5 @@
 var models = require('../models/models.js');
+var cloudinary = require('cloudinary');
 
 //Autoload en caso de :shopId lo precarga y gestiona posibles errores
 exports.load = function(req, res, next, shopId){
@@ -52,19 +53,28 @@ exports.new = function(req, res){
 		direccion:'direccion',
 		descripcion:'descripcion',
 		creado_por:'creado_por',
-		UserId:'UserId'
+		UserId:'UserId',
+		creado_el:'creado_el'
 	});
 	res.render('shops/new', {shop:shop, errors:[]});
 };
 //POST/shop/create
 exports.create = function(req, res){
+	var hora = new Date();
+	req.body.shop.creado_el = hora.getDate() + "/" + (hora.getMonth() +1) + "/" + hora.getFullYear()+" a las "+hora.getHours()+":"+hora.getMinutes('mm');
+	if(req.files.photo.name){		
+		var publicId = req.session.id + hora.getHours()+hora.getMinutes()+hora.getSeconds(); 
+		cloudinary.uploader.upload(req.files.photo.path,
+  		function(result) {},{public_id:publicId});
+		req.body.shop.image = publicId;
+	};	
 	var shop = models.Shops.build(req.body.shop);
 	//guarda en DB los campos de la shop
 	shop.validate().then(function(err){
 		if(err){
 			res.render('shops/new', {shop:shop,errors:err.errors});
 		}else{
-		shop.save({fields:["nombre", "direccion", "descripcion", "creado_por", "UserId"]})
+		shop.save({fields:["nombre", "direccion", "descripcion", "creado_por", "UserId", "creado_el","image"]})
 	.then(function(){
 		res.redirect('/shops');})}
 	});

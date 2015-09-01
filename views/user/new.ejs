@@ -1,5 +1,5 @@
 <h2>Crea un Usuario:</h2>
-<form method="post" action="/user">
+<form method="post" action="/user" enctype="multipart/form-data">
 	<label for="preg" class="rem">Username:</label><br>
 	<input type="text" id="usernameedit" name="user[username]" placeholder="username..." required="true"><br>
 	<label for="res" class="rem">Password:</label><br>
@@ -19,7 +19,7 @@
 		<option value="street">Street</option>
 		<option value="pool">Pool</option>
 	</select><br>
-	<label for="res" class="rem">Cual es tu setup favorito?</label>
+	<label for="res" class="rem">Cual es tu setup favorito?</label><br>
 	<input type="text" id="tabla" name="user[tabla]" placeholder="Aqui la marca de tabla..."><br>
 	<input type="text" id="ejes" name="user[ejes]" placeholder="Aqui la marca de ejes..."><br>
 	<input type="text" id="ruedas" name="user[ruedas]" placeholder="Aqui la marca de ruedas..."><br>
@@ -28,6 +28,8 @@
 	<input type="text" id="rideFor" name="user[rideFor]"><br>
 	<label for="res" class="rem">Por ultimo dinos cual es tu truco preferido:</label><br>
 	<input type="text" id="trick" name="user[trick]" placeholder="Truco preferido..."><br>	
+	<p> Selecciona la imagen: </p>
+    <input type="file" name='photo' accept="image/*"><br>
 	<a href="/"><button type="button">Cancelar</button></a>
 	<input type="submit" value="Crear">
 </form>
