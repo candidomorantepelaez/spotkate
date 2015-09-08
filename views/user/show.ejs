@@ -1,8 +1,8 @@
 <h2><%= user.username %></h2>
-<p>Username: <%= user.username %>.</p>
 <% if(user.image){ %> 
-<p><img class="spot_img" src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= user.image %>"></p>
+<p><img class="avatar" src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= user.image %>"></p>
 <% } %>
+<p>Username: <%= user.username %>.</p>
 <% if(user.ciudad){ %><p>Ciudad: <%= user.ciudad %>.</p> <% } %>
 <% if(user.push){ %><p>Es: <%= user.push %>.</p> <% } %>
 <% if(user.tipo){ %><p>Prefiere patinar <%= user.tipo %>.</p> <% } %>
@@ -15,5 +15,27 @@
 <% if(user.trick){ %><p>Truco favorito: <%= user.trick %>.</p> <% } %>
 <p>Creado el: <%= user.creado_el %>.</p>
 <h2><a href="javascript:history.back()">volver</a></h2>
+<h2>Fotos subidas</h2>
+<ul class="galeria">
+<% var e; for(e=0; e<user.photosSpots.length; e++) { %>
+	<li>
+		<a href="#image<%= e %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= user.photosSpots[e].image %>"></a>
+	</li>
+<% } %>
+</ul>
+<% var e; for(e=0; e<user.photosSpots.length; e++) { %>
+<div class="modal" id="image<%= e %>">
+	<h3><%= user.photosSpots[e].nombreSpot %></h3>
+	<div class="imagen">
+		<a href="#image<%= e-1 %>">&#60;</a>
+		<a href="#image<%= e+1 %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= user.photosSpots[e].image %>"></a>
+		<a href="#image<%= e+1 %>">></a>
+	</div>
+	<a class="cerrar" href="" >x</a>
+	<h4> Foto subida por <%= user.photosSpots[e].creado_por %> el <%= user.photosSpots[e].creado_el %></h4>
+</div>
+<% } %>
+	
+
 <p>ver en el mapa como opcion</p>
-<p>Aqui estarian las fotos</p>
+

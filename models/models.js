@@ -30,6 +30,42 @@ var Shops = sequelize.import(path.join(__dirname, 'shops'));
 var CommentSpot = sequelize.import(path.join(__dirname, 'commentSpot'));
 var CommentShop = sequelize.import(path.join(__dirname, 'commentShop'));
 var User = sequelize.import(path.join(__dirname, 'user'));
+var CommentPhotoShop = sequelize.import(path.join(__dirname, 'commentPhotoShop'));
+var CommentPhotoSpot = sequelize.import(path.join(__dirname, 'commentPhotoSpot'));
+var PhotosShop = sequelize.import(path.join(__dirname, 'photosShop'));
+var PhotosSpot = sequelize.import(path.join(__dirname, 'photosSpot'));
+
+//relaciones de bases bases de datos photosShop y shop
+PhotosShop.belongsTo(Shops);
+Shops.hasMany(PhotosShop);
+
+//relaciones de bases de datos user y photoshop
+PhotosShop.belongsTo(User);
+User.hasMany(PhotosShop);
+
+//relaciones entre photoshop y commentphotoshop
+CommentPhotoShop.belongsTo(PhotosShop);
+PhotosShop.hasMany(CommentPhotoShop);
+
+//relaciones entre commentphotoshop y user
+CommentPhotoShop.belongsTo(User);
+User.hasMany(CommentPhotoShop);
+
+//relaciones de bases bases de datos photosSpot y spot
+PhotosSpot.belongsTo(Spots);
+Spots.hasMany(PhotosSpot);
+
+//relaciones de bases de datos user y photospot
+PhotosSpot.belongsTo(User);
+User.hasMany(PhotosSpot);
+
+//relaciones entre photospot y commentphotospot
+CommentPhotoSpot.belongsTo(PhotosSpot);
+PhotosSpot.hasMany(CommentPhotoSpot);
+
+//relaciones entre commentphotospot y user
+CommentPhotoSpot.belongsTo(User);
+User.hasMany(CommentPhotoSpot);
 
 //relaciones de bases de datos user y spots
 Spots.belongsTo(User);
@@ -64,18 +100,23 @@ exports.Shops = Shops;
 exports.CommentSpot = CommentSpot;
 exports.CommentShop = CommentShop;
 exports.User = User;
+exports.CommentPhotoShop = CommentPhotoShop;
+exports.CommentPhotoSpot = CommentPhotoSpot;
+exports.PhotosShop = PhotosShop;
+exports.PhotosSpot = PhotosSpot;
+
 
 //sequelize.sync crea e inicializa tabla de spots en DB
 sequelize.sync().then(function(){
 	//then(..)ejecuta el manejador una vez creada la tabla
 	User.count().then(function(count){
 		if(count === 0) { //la tabla se inicializa solo si esta vacia
-			User.create({username:'admin', password:'1234', isAdmin:true}).then(function(){
+			User.create({username:'admin', password:'1234567', image:'E3j-KHGMS92srd6vxWM4GglWcvxwRlmd214123', isAdmin:true}).then(function(){
 				console.log('Base de datos (tabla user) inicializada');
 				Spots.count().then(function(count){
 					if(count===0){
 						Spots.create({nombre:'el cerro', ciudad:'cimadevilla', descripcion:'skatepark',
-							tipo:'skatepark', creado_por:'candido', UserId:1}).then(function(){
+							tipo:'skatepark', creado_por:'candido', image:'sample', UserId:1}).then(function(){
 								console.log('base de datos de spot inicializada');
 							});
 					}

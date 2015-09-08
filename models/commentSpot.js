@@ -2,8 +2,10 @@
 module.exports=function(sequelize, DataTypes){
 	return sequelize.define('commentSpot',{
 		comentario: {type: DataTypes.STRING,
-				 validate: {notEmpty:{msg:"El comentario no puede estar vacio"}}},				
+				 validate: {notEmpty:{msg:"El comentario no puede estar vacio."}}},				
 		creado_por: {type: DataTypes.STRING,
-				validate: {notEmpty:{msg:"el autor no puede quedar vacio"}}}		
-	})
+				validate: {notEmpty:{msg:"El autor no puede quedar vacio."}}},
+		creado_el: {type: DataTypes.STRING,
+				validate: {notEmpty:{msg:"La hora de creacion no puede quedar vacia."}}}		
+	});
 };

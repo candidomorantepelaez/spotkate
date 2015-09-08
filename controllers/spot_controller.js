@@ -5,7 +5,7 @@ var cloudinary = require('cloudinary');
 exports.load = function(req, res, next, spotId){
 	models.Spots.find({
 		where: {id: Number(spotId)},
-		include:[{model:models.CommentSpot}]
+		include:[{model:models.PhotosSpot},{model:models.CommentSpot}]
 	}).then(function(spot){
 		if(spot){
 			req.spot = spot;

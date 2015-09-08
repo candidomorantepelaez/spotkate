@@ -9,6 +9,7 @@ var CommentSpot = require('../controllers/commentSpot_controller');
 var CommentShop = require('../controllers/commentShop_controller');
 var SessionController = require('../controllers/session_controller');
 var UserController = require('../controllers/user_controller');
+var PhotosSpotController = require('../controllers/photosSpot_controller');
 
 /* GET home page. */
 router.get('/', Controller.index);//pagina principal o novedades
@@ -61,10 +62,7 @@ router.post('/shop/:shopsId/comments', SessionController.loginRequired, CommentS
 //Rutas de Result
 router.get('/result', Controller.busqueda);//Resultados de las busquedas
 
-//Rutas para subir fotos
-// indicamos que del fichero upload.js haga mención a la función upload, para cargar el formulario html
-router.get('/upload', Controller.upload); 
-// indicamos que del fichero upload.js haga mención a la función Uploads para subir la imagen.
-router.post('/upload', Controller.Uploads);
+//Rutas de PhotosSpot
+router.post('/photosSpot/new', SessionController.loginRequired, PhotosSpotController.create);//creacion de foto en Spot
 
 module.exports = router;//exportamos las rutas 

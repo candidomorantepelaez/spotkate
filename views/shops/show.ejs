@@ -1,11 +1,11 @@
 <h2><%= shop.nombre %></h2>
+<% if(shop.image){ %> 
+<p><img class="avatar" src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= shop.image %>"></p>
+<% } %>
 <p>Direccion: <%= shop.direccion %>.</p>
 <p>Descripcion: <%= shop.descripcion %>.</p>
 <p>Creada por: <%= shop.creado_por %>.</p>
 <p>Creada el: <%= shop.creado_el %>.</p>
-<% if(shop.image){ %> 
-<p><img class="spot_img" src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= shop.image %>"></p>
-<% } %>
 <% if(session.user){ %>
 <p><a href="/shop/<%= shop.id %>/comments/new"><button>Nuevo Comentario</button></a></p>
 <% } %>

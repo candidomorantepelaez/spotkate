@@ -3,7 +3,10 @@ var cloudinary = require('cloudinary');
 
 //Autoload :userId
 exports.load = function(req, res, next, userId){
-	models.User.find({where:{id: Number(userId)}}).then(function(user){
+	models.User.find({
+			where:{id: Number(userId)},
+			include:[{model:models.PhotosSpot}]
+			}).then(function(user){
 		if(user){
 			req.user = user;
 			next();

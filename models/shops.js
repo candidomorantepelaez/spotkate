@@ -11,5 +11,5 @@ module.exports=function(sequelize, DataTypes){
 				validate: {notEmpty:{msg:"el autor no puede quedar vacio"}}},
 		creado_el:{type:DataTypes.STRING},
 		image:{type:DataTypes.STRING}		
-	})
+	});
 };

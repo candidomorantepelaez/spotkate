@@ -1,8 +1,8 @@
-//definicion del modelo de comentarios de las shops
+//definicion del modelo de fotos de los shops
 module.exports=function(sequelize, DataTypes){
-	return sequelize.define('commentShop',{
-		comentario: {type: DataTypes.STRING,
-				 validate: {notEmpty:{msg:"El comentario no puede estar vacio."}}},				
+	return sequelize.define('photosShop',{
+		image: {type: DataTypes.STRING,
+				 validate: {notEmpty:{msg:"Debes elegir una imagen."}}},				
 		creado_por: {type: DataTypes.STRING,
 				validate: {notEmpty:{msg:"El autor no puede quedar vacio."}}},
 		creado_el: {type: DataTypes.STRING,

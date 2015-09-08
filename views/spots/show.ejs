@@ -1,14 +1,20 @@
 <h2><%= spot.nombre %></h2>
+<% if(spot.image){ %> 
+<p><img class="avatar" src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= spot.image %>"></p>
+<% } %>
 <p>Direccion: <%= spot.ciudad %>.</p>
 <p>Descripcion: <%= spot.descripcion %>.</p>
 <p>Tipo: <%= spot.tipo %>.</p>
 <p>Creado por: <%= spot.creado_por %>.</p>
 <p>Creado el: <%= spot.creado_el %>.</p>
-<% if(spot.image){ %> 
-<p><img class="spot_img" src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= spot.image %>"></p>
-<% } %>
 <% if(session.user){ %>
-<p><a href="/spot/<%= spot.id %>/comments/new"><button>Nuevo Comentario</button></a></p>
+<p><a href="/spot/<%= spot.id %>/comments/new"><button>Nuevo Comentario</button></a></p> 
+<form method="post" action="/photosSpot/new" enctype='multipart/form-data'>
+<input type="text" name="spotId" value="<%= spot.id %>" hidden/>
+<input type="text" name="nombreSpot" value="<%= spot.nombre %>" hidden />
+<input type="file" name='photo' accept="image/*">
+<input type="submit" value="Añadir foto al Spot"><br>
+</form>
 <% } %>
 <h2>Comentarios</h2>
 <table>
@@ -20,5 +26,24 @@
 </table>
 <h2><a href="javascript:history.back()">volver</a></h2>
 <p>ver en el mapa como opcion</p>
-<p>Aqui estarian las fotos</p>
-
+<h2>Fotos</h2>
+<ul class="galeria">
+<% var e; for(e=0; e<spot.photosSpots.length; e++) { %>
+	<li>
+		<a href="#image<%= e %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= spot.photosSpots[e].image %>"></a>
+	</li>
+<% } %>
+</ul>
+<% var e; for(e=0; e<spot.photosSpots.length; e++) { %>
+<div class="modal" id="image<%= e %>">
+	<h3><%= spot.nombre %></h3>
+	<div class="imagen">
+		<a href="#image<%= e-1 %>">&#60;</a>
+		<a href="#image<%= e+1 %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= spot.photosSpots[e].image %>"></a>
+		<a href="#image<%= e+1 %>">></a>
+	</div>
+	<a class="cerrar" href="" >x</a>
+	<h4> Foto subida por <%= spot.photosSpots[e].creado_por %> el <%= spot.photosSpots[e].creado_el %></h4>
+</div>
+<% } %>
+	
