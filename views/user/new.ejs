@@ -1,7 +1,7 @@
 <h2>Crea un Usuario:</h2>
-<form method="post" action="/user" enctype="multipart/form-data">
+<form name="formu" method="post" action="/user" enctype="multipart/form-data">
 	<label for="preg" class="rem">Username:</label><br>
-	<input type="text" id="usernameedit" name="user[username]" placeholder="username..." required="true"><br>
+	<input type="text" id="usernameedit" name="user[username]" placeholder="username..." required="true" required pattern="^([a-zA-Z0-9@*#]{6,15})$" ><br>
 	<label for="res" class="rem">Password:</label><br>
 	<input type="password" id="passwordedit1" name="user[password]" required="true" required pattern="^([a-zA-Z0-9@*#]{6,15})$"><br>
 	<label for="res" class="rem">Repite el password:</label><br>
@@ -33,3 +33,29 @@
 	<a href="/"><button type="button">Cancelar</button></a>
 	<input type="submit" value="Crear">
 </form>
+<script>
+	$(function(){
+	$('#passwordedit1').keyup(function(){
+		var _this = $('#passwordedit1');
+		var pass_1 = $('#passwordedit1').val();
+                _this.attr('style', 'background:white');
+		if(pass_1.charAt(0) == ' '){
+			_this.attr('style', 'background:#FF4A4A');
+		}
+ 
+		if(_this.val() == ''){
+			_this.attr('style', 'background:#FF4A4A');
+		}
+	});
+ 
+	$('#passwordedit2').keyup(function(){
+		var pass_1 = $('#passwordedit1').val();
+		var pass_2 = $('#passwordedit2').val();
+		var _this = $('#passwordedit2');
+                _this.attr('style', 'background:white');
+		if(pass_1 != pass_2 && pass_2 != ''){
+			_this.attr('style', 'background:#FF4A4A');
+		}
+	});
+	});
+</script>

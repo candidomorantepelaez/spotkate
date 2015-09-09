@@ -7,8 +7,13 @@
 <p>Tipo: <%= spot.tipo %>.</p>
 <p>Creado por: <%= spot.creado_por %>.</p>
 <p>Creado el: <%= spot.creado_el %>.</p>
+<h3>Comentarios</h3>
 <% if(session.user){ %>
-<p><a href="/spot/<%= spot.id %>/comments/new"><button>Nuevo Comentario</button></a></p> 
+ <form method="post" action="/spot/<%= spot.id %>/comments">
+	<input type="text" id="comSpot" name="commentSpot[texto]" placeholder="escribe aqui..."/>	
+	<input type="text" id="userIdspot" name="commentSpot[creado_por]" value="<%= session.user.username %>" hidden/>
+	<button type="submit">Enviar Comentario</button>	
+</form>
 <form method="post" action="/photosSpot/new" enctype='multipart/form-data'>
 <input type="text" name="spotId" value="<%= spot.id %>" hidden/>
 <input type="text" name="nombreSpot" value="<%= spot.nombre %>" hidden />
@@ -16,7 +21,6 @@
 <input type="submit" value="Añadir foto al Spot"><br>
 </form>
 <% } %>
-<h2>Comentarios</h2>
 <table>
 	<% var i; for(i=0; i<spot.commentSpots.length; i++) { %>
 		<tr>
@@ -26,7 +30,7 @@
 </table>
 <h2><a href="javascript:history.back()">volver</a></h2>
 <p>ver en el mapa como opcion</p>
-<h2>Fotos</h2>
+<h3>Fotos</h3>
 <ul class="galeria">
 <% var e; for(e=0; e<spot.photosSpots.length; e++) { %>
 	<li>

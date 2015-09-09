@@ -60,6 +60,7 @@ exports.new = function(req, res){
 
 //POST/user
 exports.create = function(req, res, next){
+	if(req.body.user.password==req.body.comp.password){
 	var hora = new Date();
 	req.body.user.creado_el = hora.getDate() + "/" + (hora.getMonth() +1) + "/" + hora.getFullYear() + " a las " + hora.getHours() + ":" + hora.getMinutes('mm');
 	if(req.files.photo.name){		
@@ -80,6 +81,9 @@ exports.create = function(req, res, next){
 			});
 		}
 	}).catch(function(error){next(error)});
+	}else{	 	
+		res.render('user/new', {user:user, errors:[]});
+	}
 };
 
 //PUT/user/:id
