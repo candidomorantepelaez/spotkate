@@ -6,6 +6,7 @@
 	<input type="password" id="passwordedit1" name="user[password]" required="true" required pattern="^([a-zA-Z0-9@*#]{6,15})$"><br>
 	<label for="res" class="rem">Repite el password:</label><br>
 	<input type="password" id="passwordedit2" name="comp[password]" required="true" required pattern="^([a-zA-Z0-9@*#]{6,15})$"><br>
+	<p id="msg"></p><br>
 	<label for="preg" class="rem">Dinos en que ciudad patinas:</label><br>
 	<input type="text" id="ciudad" name="user[ciudad]"> <br>
 	<label for="res" class="rem">Dinos como te impulsas:</label><br>
@@ -36,6 +37,7 @@
 <script>
 	$(function(){
 	$('#passwordedit1').keyup(function(){
+		var msg = $("#msg");
 		var _this = $('#passwordedit1');
 		var pass_1 = $('#passwordedit1').val();
                 _this.attr('style', 'background:white');
@@ -46,15 +48,29 @@
 		if(_this.val() == ''){
 			_this.attr('style', 'background:#FF4A4A');
 		}
+		if(pass_1.length < 6){
+			msg.text("contraseña demasiado corta");			
+		}
+		if(pass_1.length >= 6 && pass_1.length <= 15){
+			msg.text("");
+		}
+		if(pass_1.length > 15){
+			msg.text("contraseña demasiado larga");
+		}
 	});
  
 	$('#passwordedit2').keyup(function(){
+		var msg = $("#msg");
 		var pass_1 = $('#passwordedit1').val();
 		var pass_2 = $('#passwordedit2').val();
 		var _this = $('#passwordedit2');
                 _this.attr('style', 'background:white');
 		if(pass_1 != pass_2 && pass_2 != ''){
 			_this.attr('style', 'background:#FF4A4A');
+			msg.text("Las contraseñas no coinciden");
+		}
+		if(pass_1 == pass_2){
+		msg.text("");
 		}
 	});
 	});
