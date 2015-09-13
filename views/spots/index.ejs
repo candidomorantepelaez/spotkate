@@ -1,27 +1,21 @@
 <h2>Bienvenido a los spots</h2>
 <h2>Spots:</h2>
-<table>
-<% var i; for(i=0; i<spots.length; i++) { %>
-	<tr>
-		<td><a href="spot/<%= spots[i].id %>"><%= spots[i].nombre %></a></td>
-		<% if(session.user){ 
-			console.log("session.user.id:"+session.user.id);
-			console.log("spots[i].UserId:"+spots[i].UserId);
-			if(session.user.isAdmin || session.user.id === spots[i].UserId) {%>
-		<td><a href="spot/<%= spots[i].id %>/edit"><button>editar</button></a></td>
-		<td>
-			<form method="post" action="spot/<%= spots[i].id %>?_method=delete">
-				<button type="submit" onclick="return confirm('Seguro que quieres borrar: <%= spots[i].nombre %>')">
-				Borrar</button>
+<ul class="galeria">
+<% var i; for(i=0; i<spots.length; i++) { %>		
+		<li>
+			<a href="spot/<%= spots[i].id %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= spots[i].image %>"></a><br>	
+			<a href="spot/<%= spots[i].id %>"><%= spots[i].nombre %></a><br>
+			<% if(session.user){ 			
+				if(session.user.isAdmin || session.user.id === spots[i].UserId) {%>
+				<a href="spot/<%= spots[i].id %>/edit"><button>editar</button></a>
+				<form method="post" action="spot/<%= spots[i].id %>?_method=delete">
+					<button type="submit" onclick="return confirm('Seguro que quieres borrar: <%= spots[i].nombre %>')">
+					Borrar</button>
 				</form>
-			</td>
-		<% } } %>		
-	</tr>
+			<% } } %>
+		</li>		
 <% } %>
-</table>
+</ul>
 <% if(session.user){ %>
 <a href="/spot/new"><button type="button">Crea un Spot</button></a>
 <% } %>
-<p>bucador de spots por nombre o datos</p>
-<p>mi perfil(necesario registro)</p>
-<p>subir foto(necesario registro)</p>

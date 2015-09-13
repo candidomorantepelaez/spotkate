@@ -34,7 +34,7 @@
 <ul class="galeria">
 <% var e; for(e=0; e<spot.photosSpots.length; e++) { %>
 	<li>
-		<a href="#image<%= e %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= spot.photosSpots[e].image %>"></a>
+		<a href="/photosSpot/<%= spot.photosSpots[e].id %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= spot.photosSpots[e].image %>"></a>
 	</li>
 <% } %>
 </ul>
@@ -46,8 +46,16 @@
 		<a href="#image<%= e+1 %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= spot.photosSpots[e].image %>"></a>
 		<a href="#image<%= e+1 %>">></a>
 	</div>
-	<a class="cerrar" href="" >x</a>
+	<a class="cerrar" href="" >x</a>	
 	<h4> Foto subida por <%= spot.photosSpots[e].creado_por %> el <%= spot.photosSpots[e].creado_el %></h4>
-</div>
+	<% if(session.user){ %>
+		<h4>Añadir Comentario</h4>
+		<form method="post" action="">
+			<input type="text" id="comPhoSpot" name="commentPhotoSpot[comentario]" placeholder="escribe aqui..."/>
+			<input type="text" name="commentPhotoSpot[creado_por]" value="<%= session.user.username %>" hidden/>
+			<button type="submit">Enviar</button>		
+		</form>
+	<% } %>
+	</div>
 <% } %>
 	

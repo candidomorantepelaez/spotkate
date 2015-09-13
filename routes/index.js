@@ -64,5 +64,6 @@ router.get('/result', Controller.busqueda);//Resultados de las busquedas
 
 //Rutas de PhotosSpot
 router.post('/photosSpot/new', SessionController.loginRequired, PhotosSpotController.create);//creacion de foto en Spot
+router.get('/photosSpot/:photosSpotID', PhotosSpotController.show);
 
 module.exports = router;//exportamos las rutas 

@@ -1,5 +1,21 @@
 <h2>Bienvenido a Novedades</h2>
-<p>Mostrar fotos, videos y spots mas recientes</p>
-<p>busqueda de amigos(necesario registro)</p>
-<p>mi perfil(necesario registro)</p>
-<p>subir foto(necesario registro)</p>
+<ul class="galeria">
+<% var e; for(e=0; e<result.length; e++) { %>
+	<li>
+		<a href="#image<%= e %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= result[e].image %>"></a>
+	</li>
+<% } %>
+</ul>
+<% var e; for(e=0; e<result.length; e++) { %>
+<div class="modal" id="image<%= e %>">
+	<h3><%= result[e].nombreSpot %></h3>
+	<div class="imagen">
+		<a href="#image<%= e-1 %>">&#60;</a>
+		<a href="#image<%= e+1 %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= result[e].image %>"></a>
+		<a href="#image<%= e+1 %>">></a>
+	</div>
+	<a class="cerrar" href="" >x</a>
+	<h4> Foto subida por <%= result[e].creado_por %> el <%= result[e].creado_el %></h4>
+</div>
+<% } %>
+

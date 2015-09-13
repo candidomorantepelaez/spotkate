@@ -1,8 +1,8 @@
 var models = require('../models/models.js');
 var cloudinary = require('cloudinary');
 
-//POST/photosShop/create
-exports.create = function(req, res, next){	
+//POST/photosSpot/create
+exports.create = function(req, res){	
 	var hora = new Date();	
 	if(req.files.photo.name){		
 		var publicId = req.session.id + hora.getHours()+hora.getMinutes()+hora.getSeconds(); 
@@ -27,4 +27,8 @@ exports.create = function(req, res, next){
 		res.redirect('/spot/'+req.body.spotId);})
 	};
 	});
+};
+//GET/photosSpot/:photosSpotId
+exports.show = function(req, res){
+	res.render('photosSpot/show', {errors:[]});
 };

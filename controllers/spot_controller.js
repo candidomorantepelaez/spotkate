@@ -14,7 +14,9 @@ exports.load = function(req, res, next, spotId){
 			next(new Error('Este spot todavia no esta creado ¡ANIMATE y CREALO!!!'));
 		}
 	}).catch(function(error){next(error);});
+	
 };
+
 //MW que permite acciones solo a admin o al creador del spot
 exports.ownershipRequired = function(req, res, next){
 	var objSpotOwner = req.spot.UserId;

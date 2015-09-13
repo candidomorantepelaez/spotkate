@@ -1,8 +1,10 @@
 var models = require('../models/models.js');
 
 exports.index = function(req, res){
-	res.render('index',{errors:[]});
-}
+	models.PhotosSpot.findAll({order:"createdAt DESC"}).then(function(result){
+		res.render('index',{result:result, errors:[]});
+	});	
+};
 
 //Get/result
 exports.busqueda=function(req, res){	

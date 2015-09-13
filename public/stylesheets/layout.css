@@ -59,7 +59,7 @@ table{
   justify-content: space-around;
 }
 .galeria li{
-  margin:5px;
+  margin:5px;  
 }
 .galeria img{
   width: 150px;
@@ -121,4 +121,16 @@ table{
   padding: 5px;
   border-radius: 50%;
   line-height: 25px;  
+}
+#map{
+  height: 350px;
+  width: 100%;
+  border-radius: 10px;
+  -moz-box-shadow: 0px 5px 20px #ccc;
+  -webkit-box-shadow: 0px 5px 20px #ccc;
+  box-shadow: 0px 5px 20px #ccc;
+}
+#photoMap{
+  height: 100px;
+  width: 100px;
 }

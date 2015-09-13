@@ -1,8 +1,30 @@
+<script type="text/javascript">
+var map;
+    $(document).ready(function(){
+      map = new GMaps({
+        el: '#map',
+        lat: 43.5316991,
+        lng: -5.6618833,
+        zoomControl : true,
+        zoomControlOpt: {
+            style : 'SMALL',
+            position: 'TOP_LEFT'
+        },
+        panControl : false,
+        streetViewControl : false,
+        mapTypeControl: false,
+        overviewMapControl: false
+      });
+      map.addMarker({
+        lat: 43.548760,
+        lng: -5.665282,
+        title: 'Skatepark El cerro',
+        infoWindow:{
+            content:'<img id="photoMap" src="http://res.cloudinary.com/photo-spotkate/image/upload/RqiH8teWWexbrRvK6cI9quuY56HKqXdJ191422">'
+           }
+      });        
+    });
+</script>
 <h2>Bienvenido al mapa</h2>
-<p>Mostrar mapa con todas los spots y tiendas</p>
-<p>buscador de ciudades, calles etc</p>
-<p>buscador de spots y tiendas</p>
-<p>filtro solo spots</p>
-<p>filtro solo shops</p>
-<p>mi perfil(necesario registro)</p>
-<p>subir foto(necesario registro)</p>
+<div id="map">
+</div>
