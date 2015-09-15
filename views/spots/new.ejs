@@ -4,17 +4,94 @@
 	<input type="text" id="nomsp" name="spot[nombre]" placeholder="nombre..." required="true" size="60" maxlength="255"/><br>
 	<label for="ciusp" class="rem">Dinos donde esta el spot:</label>
 	<input type="text" id="ciusp" name="spot[ciudad]" placeholder="ciudad..." required="true" size="60" maxlength="255"/><br>
-	<label for="dessp" class="rem">Describenos el spot:</label>
+	<p>Selecciona en el mapa donde esta el spot: </p> 
+    <div id="map" class="mapNewSpot">
+    </div>
+    <label for="dessp" class="rem">Describenos el spot:</label>
 	<input type="text" id="dessp" name="spot[descripcion]" placeholder="descripcion..." required="true" size="60" maxlength="255"/><br>
 	<label for="tisp" class="rem">skatepark o street:</label>
 	<select id="tisp" name="spot[tipo]" required="true">
 		<option value="skatepark">Skatepark</option>
 		<option value="street">Street</option>
 	</select><br>	
-	<p> Selecciona la imagen </p>
+	<p>Selecciona una imagen que represente al spot:</p>
     <input type="file" name='photo' accept="image/*"><br>
 	<input type="text" id="crpsp" name="spot[creado_por]" value="<%= session.user.username %>" hidden/><br>
 	<input type="text" id="sIsp" name="spot[UserId]" value="<%= session.user.id %>" hidden>
+    <input type="text" id="latspot" name="spot[lat]" value="" require="true" hidden>
+    <input type="text" id="lngspot" name="spot[lng]" value="" require="true" hidden>
 	<a href="/spots"><button type="button">Cancelar</button></a>
 	<input type="submit" value="Crear Spot">	
 </form>
+<script type="text/javascript">
+var map;
+    $(document).ready(function(){
+        cargarmap();
+    });
+    function cargarmap(e){       
+      map = new GMaps({
+        el: '#map',
+        lat: 43.5316991,
+        lng: -5.6618833,
+        click: function(e){
+           cargarmap(); 
+           map.addMarker({               
+                lat: e.latLng.lat(),
+                lng: e.latLng.lng()
+           });
+           latspot=e.latLng.lat();
+           lngspot=e.latLng.lng();
+           $('#latspot').attr("value", latspot);
+           $('#lngspot').attr("value", lngspot);           
+        },
+        zoom: 10,
+        zoomControl : true,
+        zoomControlOpt: {
+            style : 'SMALL',
+            position: 'TOP_LEFT'
+        },
+        panControl : true,
+        streetViewControl : true,
+        mapTypeControl: true,
+        overviewMapControl: true        
+      });         
+      map.addControl({
+        position: 'top_right',
+        content: 'Geolocate',
+        style: {
+          margin: '5px',
+          padding: '1px 6px',
+          border: 'solid 1px #717B87',
+          background: '#fff'
+        },
+        events: {
+          click: function(){
+            GMaps.geolocate({
+              success: function(position){
+                map.setCenter(position.coords.latitude, position.coords.longitude);
+              },
+              error: function(error){
+                alert('Geolocation failed: ' + error.message);
+              },
+              not_supported: function(){
+                alert("Your browser does not support geolocation");
+              }
+            });
+          }
+        }
+      });
+      $.get("/maps/spots", function(spots){
+        for(e=0; e< spots.length; e++){       
+            map.addMarker({
+                lat: spots[e].lat,
+                lng: spots[e].lng,
+                title: spots[e].nombre,
+                infoWindow: {
+                    content: '<p>'+spots[e].nombre+'</p><br><a href="spot/'+spots[e].id+'"><img class="photoMap" src="http://res.cloudinary.com/photo-spotkate/image/upload/'+spots[e].image+'"></a>'
+                }
+            });
+        };           
+      });
+      
+    };
+</script>

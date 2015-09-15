@@ -74,7 +74,7 @@ exports.create = function(req, res){
 		if(err){
 			res.render('shops/new', {shop:shop,errors:err.errors});
 		}else{
-		shop.save({fields:["nombre", "direccion", "descripcion", "creado_por", "UserId", "creado_el","image"]})
+		shop.save({fields:["nombre", "ciudad", "descripcion", "creado_por", "UserId", "creado_el","image"]})
 	.then(function(){
 		res.redirect('/shops');})}
 	});

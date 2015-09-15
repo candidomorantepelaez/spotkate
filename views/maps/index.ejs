@@ -1,30 +1,61 @@
+
+<h2>Bienvenido al mapa</h2>
+<div id="map" class="mapIndex">    
+</div>
 <script type="text/javascript">
 var map;
-    $(document).ready(function(){
+    $(document).ready(function(){       
       map = new GMaps({
         el: '#map',
         lat: 43.5316991,
         lng: -5.6618833,
+        zoom: 10,
         zoomControl : true,
         zoomControlOpt: {
             style : 'SMALL',
             position: 'TOP_LEFT'
         },
-        panControl : false,
-        streetViewControl : false,
-        mapTypeControl: false,
-        overviewMapControl: false
+        panControl : true,
+        streetViewControl : true,
+        mapTypeControl: true,
+        overviewMapControl: true        
+      });         
+      map.addControl({
+        position: 'top_right',
+        content: 'Geolocate',
+        style: {
+          margin: '5px',
+          padding: '1px 6px',
+          border: 'solid 1px #717B87',
+          background: '#fff'
+        },
+        events: {
+          click: function(){
+            GMaps.geolocate({
+              success: function(position){
+                map.setCenter(position.coords.latitude, position.coords.longitude);
+              },
+              error: function(error){
+                alert('Geolocation failed: ' + error.message);
+              },
+              not_supported: function(){
+                alert("Your browser does not support geolocation");
+              }
+            });
+          }
+        }
       });
+      $.get("/maps/spots", function(spots){
+        for(e=0; e< spots.length; e++){       
       map.addMarker({
-        lat: 43.548760,
-        lng: -5.665282,
-        title: 'Skatepark El cerro',
-        infoWindow:{
-            content:'<img id="photoMap" src="http://res.cloudinary.com/photo-spotkate/image/upload/RqiH8teWWexbrRvK6cI9quuY56HKqXdJ191422">'
-           }
-      });        
+        lat: spots[e].lat,
+        lng: spots[e].lng,
+        title: spots[e].nombre,
+        infoWindow: {
+          content: '<p>'+spots[e].nombre+'</p><br><a href="spot/'+spots[e].id+'"><img class="photoMap" src="http://res.cloudinary.com/photo-spotkate/image/upload/'+spots[e].image+'"></a>'
+        }
+      });
+      };           
+      });	  
     });
 </script>
-<h2>Bienvenido al mapa</h2>
-<div id="map">
-</div>

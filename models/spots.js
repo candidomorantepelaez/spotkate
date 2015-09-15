@@ -3,6 +3,10 @@ module.exports=function(sequelize, DataTypes){
 	return sequelize.define('spots',{
 		nombre: {type: DataTypes.STRING,
 				 validate: {notEmpty:{msg:"El nombre no puede estar vacio"}}},
+		lat: {type: DataTypes.STRING,
+				validate: {notEmpty:{msg:"la direccion no puede quedar vacia"}}},
+		lng: {type: DataTypes.STRING,
+				validate: {notEmpty:{msg:"la direccion no puede quedar vacia"}}},		
 		ciudad: {type: DataTypes.STRING,
 				validate: {notEmpty:{msg:"La direccion no puede estar vacia"}}},
 		descripcion: {type: DataTypes.TEXT,

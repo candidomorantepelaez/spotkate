@@ -30,6 +30,7 @@ router.delete('/user/:userId', SessionController.loginRequired,UserController.ow
 
 //Rutas de Maps
 router.get('/maps', MapsController.maps);//muestra el mapa
+router.get('/maps/spots', MapsController.spots);//muestra busqueda
 
 //Rutas de Spots
 router.param('spotsId', SpotController.load);//autoload de spots

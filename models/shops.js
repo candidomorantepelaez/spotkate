@@ -3,7 +3,11 @@ module.exports=function(sequelize, DataTypes){
 	return sequelize.define('shops',{
 		nombre: {type: DataTypes.STRING,
 				 validate: {notEmpty:{msg:"El nombre no puede estar vacio"}}},
-		direccion: {type: DataTypes.STRING,
+		lat: {type: DataTypes.STRING,
+				validate: {notEmpty:{msg:"la direccion no puede quedar vacia"}}},
+		lng: {type: DataTypes.STRING,
+				validate: {notEmpty:{msg:"la direccion no puede quedar vacia"}}},		 
+		ciudad: {type: DataTypes.STRING,
 				validate: {notEmpty:{msg:"La direccion no puede estar vacia"}}},
 		descripcion: {type: DataTypes.TEXT,
 				validate: {notEmpty:{msg:"la descripcion no puede estar vacia"}}},				

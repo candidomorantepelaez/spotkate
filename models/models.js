@@ -115,8 +115,9 @@ sequelize.sync().then(function(){
 				console.log('Base de datos (tabla user) inicializada');
 				Spots.count().then(function(count){
 					if(count===0){
-						Spots.create({nombre:'el cerro', ciudad:'cimadevilla', descripcion:'skatepark',
-							tipo:'skatepark', creado_por:'candido', image:'sample', UserId:1}).then(function(){
+						var hora = new Date();
+						Spots.create({nombre:'el cerro', lat: '43.548812', lng: '-5.665255', ciudad:'cimadevilla', descripcion:'skatepark',
+							tipo:'skatepark', creado_por:'candido', image:'RqiH8teWWexbrRvK6cI9quuY56HKqXdJ191422', creado_el:''+hora.getDate() + "/" + (hora.getMonth() +1) + "/" + hora.getFullYear()+" a las "+hora.getHours()+":"+hora.getMinutes('mm')+'', UserId:1}).then(function(){
 								console.log('base de datos de spot inicializada');
 							});
 					}

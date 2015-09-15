@@ -49,7 +49,9 @@ exports.new = function(req, res){
 		creado_por:'creado_por',
 		UserId:'UserId',
 		creado_el:'creado_el',
-		image:'image'
+		image:'image',
+		lat:'lat',
+		lng:'lng'
 	});
 	res.render('spots/new', {spot:spot, errors:[]});
 };
@@ -69,7 +71,7 @@ exports.create = function(req, res){
 		if(err){
 			res.render('spots/new', {spot:spot,errors:err.errors});
 		}else{
-		spot.save({fields:["nombre", "ciudad", "descripcion", "tipo", "creado_por", "UserId", "image","creado_el"]})
+		spot.save({fields:["nombre", "ciudad", "descripcion", "tipo", "creado_por", "UserId", "image","creado_el", "lat", "lng"]})
 	.then(function(){
 		res.redirect('/spots');})}
 	});

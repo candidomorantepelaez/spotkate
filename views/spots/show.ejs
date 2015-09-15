@@ -34,7 +34,7 @@
 <ul class="galeria">
 <% var e; for(e=0; e<spot.photosSpots.length; e++) { %>
 	<li>
-		<a href="/photosSpot/<%= spot.photosSpots[e].id %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= spot.photosSpots[e].image %>"></a>
+		<a href="#image<%= e %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= spot.photosSpots[e].image %>"></a>
 	</li>
 <% } %>
 </ul>
