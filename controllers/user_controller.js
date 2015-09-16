@@ -74,8 +74,8 @@ exports.create = function(req, res, next){
 		if(err){
 			res.render('user/new', {user:user, errors:err.errors});
 		}else{
-			user.save({fields:["username", "password", "ciudad", "push", "tipo", "tabla",
-				"ejes", "ruedas", "rodatas", "rideFor", "trick", "creado_el", "image" ]}).then(function(){
+			user.save({fields:["username", "password", "mail", "ciudad", "push", "tipo", "tabla",
+				"ejes", "ruedas", "rodatas", "rideFor", "trick", "creado_el", "image"]}).then(function(){
 				req.session.user = {id:user.id, username:user.username};
 				res.redirect('/');
 			});
@@ -90,6 +90,7 @@ exports.create = function(req, res, next){
 exports.update = function(req, res, next){
 	req.user.username = req.body.user.username;
 	req.user.password = req.body.user.password;
+	req.user.mail = req.body.user.mail;
 	req.user.ciudad = req.body.user.ciudad;
 	req.user.push = req.body.user.push;
 	req.user.tipo = req.body.user.tipo;
@@ -104,7 +105,7 @@ exports.update = function(req, res, next){
 		if(err){
 			res.render('user/'+req.user.id, {user: req.user, errors:err.errors});
 		}else{
-			req.user.save({fields:["username", "password", "ciudad", "push", "tipo", "tabla", "ejes",
+			req.user.save({fields:["username", "password", "mail", "ciudad", "push", "tipo", "tabla", "ejes",
 				"ruedas", "rodatas", "rideFor", "trick"]}).then(function(){
 				res.redirect('/');//redireccion http a /
 			});

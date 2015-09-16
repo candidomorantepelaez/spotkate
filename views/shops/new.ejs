@@ -7,8 +7,8 @@
 	<label for="dessh" class="rem">Describenos la tienda:</label>
 	<input type="text" id="dessh" name="shop[descripcion]" placeholder="descripcion..." required="true" size="60" maxlength="255"/><br>
 	<label for="crpsh" class="rem">Que usuario maneja esta tienda:</label>
-	<input type="text" id="crpsh" name="shop[creado_por]" value="<%= session.user.username %>" hidden/><br>
-	<input type="text" id="usidsh" name="shop[UserId]" placeholder="Asigna un usuario de tienda" required="true" size="60" maxlenght="255"/><br>
+	<input type="text" id="crpsh" name="shop[creado_por]" placeholder="usuario..."/><br>
+	<input type="text" id="usidsh" name="shop[UserId]" placeholder="Asigna el id que tendra permiso para la tienda" required="true" size="60" maxlenght="255"/><br>
 	<p> Selecciona la imagen </p>
     <input type="file" name='photo' accept="image/*"><br>
 	<a href="/shops"><button type="button">Cancelar</button></a>

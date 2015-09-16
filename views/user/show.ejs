@@ -3,6 +3,7 @@
 <p><img class="avatar" src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= user.image %>"></p>
 <% } %>
 <p>Username: <%= user.username %>.</p>
+<% if(user.mail){ %><p>Mail: <%= user.mail %>.</p> <% } %> 
 <% if(user.ciudad){ %><p>Ciudad: <%= user.ciudad %>.</p> <% } %>
 <% if(user.push){ %><p>Es: <%= user.push %>.</p> <% } %>
 <% if(user.tipo){ %><p>Prefiere patinar <%= user.tipo %>.</p> <% } %>

@@ -87,13 +87,14 @@ exports.update = function(req, res){
     req.spot.ciudad = req.body.spot.ciudad;
 	req.spot.descripcion = req.body.spot.descripcion;
 	req.spot.tipo = req.body.spot.tipo;
-	req.spot.creado_por=req.spot.creado_por +", modificado por "+ req.body.spot.creado_por;
-	
+	req.spot.lat = req.body.spot.lat;
+	req.spot.lng = req.body.spot.lng;
+		
 	req.spot.validate().then(function(err){
 		if(err){
 			res.render('spots/edit', {spot:req.spot, errors:err.errors});
 		}else{
-			req.spot.save({fields:["nombre", "ciudad", "descripcion", "tipo", "creado_por"]})
+			req.spot.save({fields:["nombre", "ciudad", "descripcion", "tipo", "lat", "lng"]})
 			.then(function(){res.redirect('/spots');});
 		}
 	});

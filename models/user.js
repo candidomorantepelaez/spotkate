@@ -37,6 +37,7 @@ module.exports = function(sequelize, DataTypes){
 			type:DataTypes.BOOLEAN,
 			defaultValue: false
 		},
+		mail:{type:DataTypes.STRING},
 		ciudad:{type:DataTypes.STRING},
 		push:{type:DataTypes.STRING},
 		tipo:{type:DataTypes.STRING},

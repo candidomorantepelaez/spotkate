@@ -17,15 +17,15 @@ exports.create = function(req, res){
 		spotId:req.body.spotId,
 		nombreSpot: req.body.nombreSpot,
 	});
-	//guarda en DB los campos de la foto
+//guarda en DB los campos de la foto
 	photosSpot.validate().then(function(err){
 		if(err){
 			res.redirect('/spot/'+req.body.spotId);
 		}else{
-		photosSpot.save({fields:["image", "creado_el", "creado_por", "spotId", "UserId", "nombreSpot"]})
-	.then(function(){
-		res.redirect('/spot/'+req.body.spotId);})
-	};
+			photosSpot.save({fields:["image", "creado_el", "creado_por", "spotId", "UserId", "nombreSpot"]})
+		.then(function(){
+			res.redirect('/spot/'+req.body.spotId);})
+		};
 	});
 };
 //GET/photosSpot/:photosSpotId

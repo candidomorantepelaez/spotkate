@@ -2,22 +2,60 @@
 <% if(shop.image){ %> 
 <p><img class="avatar" src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= shop.image %>"></p>
 <% } %>
-<p>Direccion: <%= shop.direccion %>.</p>
+<p>Direccion: <%= shop.ciudad %>.</p>
 <p>Descripcion: <%= shop.descripcion %>.</p>
 <p>Creada por: <%= shop.creado_por %>.</p>
 <p>Creada el: <%= shop.creado_el %>.</p>
+<h3>Comentarios</h3>
 <% if(session.user){ %>
-<p><a href="/shop/<%= shop.id %>/comments/new"><button>Nuevo Comentario</button></a></p>
+ <form method="post" action="/shop/<%= shop.id %>/comments">
+	<input type="text" id="comShop" name="commentShop[texto]" placeholder="escribe aqui..."/>	
+	<input type="text" id="userIdshop" name="commentShop[creado_por]" value="<%= session.user.username %>" hidden/>
+	<button type="submit">Enviar Comentario</button>	
+</form>
+<% if(session.user.id===shop.UserId||session.user.isAdmin){ %>
+		<form method="post" action="/photosShop/new" enctype='multipart/form-data'>
+		<input type="text" name="shopId" value="<%= shop.id %>" hidden/>
+		<input type="text" name="nombreShop" value="<%= shop.nombre %>" hidden />
+		<input type="file" name='photo' accept="image/*" required="true">
+		<input type="submit" value="Añadir foto a la tienda"><br>
+	</form>
+	<% } %>
 <% } %>
-<h2>Comentarios</h2>
 <table>
 	<% var i; for(i=0; i<shop.commentShops.length; i++) { %>
 		<tr>
-			<td><%= shop.commentShops[i].creado_por %>:</td><td><%= shop.commentShops[i].comentario %></td>			
+			<td><%= shop.commentShops[i].creado_por %>:</td><td><%= shop.commentShops[i].comentario %></td>
 		</tr>
 	<% } %>
-	</table>
+</table>
 <h2><a href="javascript:history.back()">volver</a></h2>
-<p>ver en el mapa como opcion</p>
-<p>Aqui estarian las fotos</p>
-
+<h3>Fotos</h3>
+<ul class="galeria">
+<% var e; for(e=0; e<shop.photosShops.length; e++) { %>
+	<li>
+		<a href="#image<%= e %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= shop.photosShops[e].image %>"></a>
+	</li>
+<% } %>
+</ul>
+<% var e; for(e=0; e<shop.photosShops.length; e++) { %>
+<div class="modal" id="image<%= e %>">
+	<h3><%= shop.nombre %></h3>
+	<div class="imagen">
+		<a href="#image<%= e-1 %>">&#60;</a>
+		<a href="#image<%= e+1 %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= shop.photosShops[e].image %>"></a>
+		<a href="#image<%= e+1 %>">></a>
+	</div>
+	<a class="cerrar" href="" >x</a>	
+	<h4> Foto subida por <%= shop.photosShops[e].creado_por %> el <%= shop.photosShops[e].creado_el %></h4>
+	<% if(session.user){ %>
+		<h4>Añadir Comentario</h4>
+		<form method="post" action="">
+			<input type="text" id="comPhoShop" name="commentPhotoShop[comentario]" placeholder="escribe aqui..."/>
+			<input type="text" name="commentPhotoShop[creado_por]" value="<%= session.user.username %>" hidden/>
+			<button type="submit">Enviar</button>		
+		</form>
+	<% } %>
+	</div>
+<% } %>
+	

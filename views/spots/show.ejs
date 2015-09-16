@@ -17,7 +17,7 @@
 <form method="post" action="/photosSpot/new" enctype='multipart/form-data'>
 <input type="text" name="spotId" value="<%= spot.id %>" hidden/>
 <input type="text" name="nombreSpot" value="<%= spot.nombre %>" hidden />
-<input type="file" name='photo' accept="image/*">
+<input type="file" name='photo' accept="image/*" required="true">
 <input type="submit" value="Añadir foto al Spot"><br>
 </form>
 <% } %>

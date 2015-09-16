@@ -1,23 +1,21 @@
 <h2>Bienvenido a las tiendas</h1>
 <h2>Shops:</h2>
-<table>
-<% var i; for(i=0; i<shops.length; i++) { %>
-	<tr>
-		<td><a href="shop/<%= shops[i].id %>"><%= shops[i].nombre %></a></td>
-		<%	if(session.user){
-			 if(session.user.isAdmin || session.user.id ===shops[i].UserId){ %>
-		<td><a href="shop/<%= shops[i].id %>/edit"><button>Editar</button></a></td>
-		<td>
-			<form method="post" action="shop/<%= shops[i].id %>?_method=delete">
-				<button type="submit" onclick="return confirm('Seguro que quieres borrar: <%= shops[i].nombre %>')">
-				Borrar</button>
+<ul class="galeria">
+<% var i; for(i=0; i<shops.length; i++) { %>		
+		<li>
+			<a href="shop/<%= shops[i].id %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= shops[i].image %>"></a><br>	
+			<a href="shop/<%= shops[i].id %>"><%= shops[i].nombre %></a><br>
+			<% if(session.user){ 			
+				if(session.user.isAdmin || session.user.id === shops[i].UserId) {%>
+				<a href="shop/<%= shops[i].id %>/edit"><button>editar</button></a>
+				<form method="post" action="shop/<%= shops[i].id %>?_method=delete">
+					<button type="submit" onclick="return confirm('Seguro que quieres borrar: <%= shops[i].nombre %>')">
+					Borrar</button>
 				</form>
-			</td>
-		  <% } %>
-		<% } %>	
-	</tr>
+			<% } } %>
+		</li>		
 <% } %>
-</table>
+</ul>
 <% if(session.user){
 	if(session.user.isAdmin){ %>
 <a href="/shop/new"><button type="button">Crea una Shop</button></a>
