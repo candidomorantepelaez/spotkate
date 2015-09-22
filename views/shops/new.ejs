@@ -4,13 +4,91 @@
 	<input type="text" id="nomsh" name="shop[nombre]" placeholder="nombre..." required="true" size="60" maxlength="255"/><br>
 	<label for="dirsh" class="rem">Dinos donde esta la tienda:</label>
 	<input type="text" id="dirsh" name="shop[ciudad]" placeholder="ciudad..." required="true" size="60" maxlength="255"/><br>
+	<p>Selecciona en el mapa donde esta la shop: </p>
+    <div id="map" class="mapNewSpot">
+    </div>
+	<input type="text" id="latshop" name="shop[lat]" value="" require="true" hidden>
+    <input type="text" id="lngshop" name="shop[lng]" value="" require="true" hidden>
 	<label for="dessh" class="rem">Describenos la tienda:</label>
 	<input type="text" id="dessh" name="shop[descripcion]" placeholder="descripcion..." required="true" size="60" maxlength="255"/><br>
 	<label for="crpsh" class="rem">Que usuario maneja esta tienda:</label>
 	<input type="text" id="crpsh" name="shop[creado_por]" placeholder="usuario..."/><br>
 	<input type="text" id="usidsh" name="shop[UserId]" placeholder="Asigna el id que tendra permiso para la tienda" required="true" size="60" maxlenght="255"/><br>
+	<input type="text" id="shopid" name="shop[shopId]" hidden/>
 	<p> Selecciona la imagen </p>
     <input type="file" name='photo' accept="image/*"><br>
 	<a href="/shops"><button type="button">Cancelar</button></a>
 	<input type="submit" value="Crear Shop">	
 </form>
+<script type="text/javascript">
+var map;
+    $(document).ready(function(){
+        cargarmap();
+    });
+    function cargarmap(e){       
+      map = new GMaps({
+        el: '#map',
+        lat: 43.5316991,
+        lng: -5.6618833,
+        click: function(e){
+           cargarmap(); 
+           map.addMarker({               
+                lat: e.latLng.lat(),
+                lng: e.latLng.lng()
+           });
+           latshop=e.latLng.lat();
+           lngshop=e.latLng.lng();
+           $('#latshop').attr("value", latshop);
+           $('#lngshop').attr("value", lngshop);           
+        },
+        zoom: 10,
+        zoomControl : true,
+        zoomControlOpt: {
+            style : 'SMALL',
+            position: 'TOP_LEFT'
+        },
+        panControl : true,
+        streetViewControl : true,
+        mapTypeControl: true,
+        overviewMapControl: true        
+      });         
+      map.addControl({
+        position: 'top_right',
+        content: 'Geolocate',
+        style: {
+          margin: '5px',
+          padding: '1px 6px',
+          border: 'solid 1px #717B87',
+          background: '#fff'
+        },
+        events: {
+          click: function(){
+            GMaps.geolocate({
+              success: function(position){
+                map.setCenter(position.coords.latitude, position.coords.longitude);
+              },
+              error: function(error){
+                alert('Geolocation failed: ' + error.message);
+              },
+              not_supported: function(){
+                alert("Your browser does not support geolocation");
+              }
+            });
+          }
+        }
+      });
+      $.get("/maps/spots", function(spots){
+        for(e=0; e< spots.length; e++){       
+            map.addMarker({
+                lat: spots[e].lat,
+                lng: spots[e].lng,
+                title: spots[e].nombre,
+                infoWindow: {
+                    content: '<p>'+spots[e].nombre+'</p><br><a href="spot/'+spots[e].id+'"><img class="photoMap" src="http://res.cloudinary.com/photo-spotkate/image/upload/'+spots[e].image+'"></a>'
+                }
+            });
+        };           
+      });
+      
+    };
+</script>

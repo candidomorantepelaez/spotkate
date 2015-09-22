@@ -1,9 +1,25 @@
 var models = require('../models/models.js');
 
-exports.index = function(req, res){
-	models.PhotosSpot.findAll({order:"createdAt DESC"}).then(function(result){
-		res.render('index',{result:result, errors:[]});
-	});	
+exports.index = function(req, res, next){
+	
+	models.PhotosShop.findAll({
+			orden:['image','DESC' ]
+		}).then(function(fotospot){
+			if(fotospot){
+				models.PhotosSpot.findAll({
+					orden:['image','DESC']
+				}).then(function(result){
+					if(result){
+						res.render('index',{result:result, fotospot:fotospot,  errors:[]});
+					}else{
+						next(new Error('No tenemos novedades que presentarte'));
+					}
+				});				
+			}else{
+				next(new Error('No tenemos novedades que presentarte'))
+			}
+	}).catch(function(error){next(error);});
+		
 };
 
 //Get/result

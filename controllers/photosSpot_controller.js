@@ -15,7 +15,7 @@ exports.create = function(req, res){
 		creado_el:hora.getDate() + "/" + (hora.getMonth() +1) + "/" + hora.getFullYear()+" a las "+hora.getHours()+":"+hora.getMinutes('mm'),
 		UserId:req.session.user.id,
 		spotId:req.body.spotId,
-		nombreSpot: req.body.nombreSpot,
+		nombreSpot: req.body.nombreSpot
 	});
 //guarda en DB los campos de la foto
 	photosSpot.validate().then(function(err){

@@ -10,6 +10,7 @@ var CommentShop = require('../controllers/commentShop_controller');
 var SessionController = require('../controllers/session_controller');
 var UserController = require('../controllers/user_controller');
 var PhotosSpotController = require('../controllers/photosSpot_controller');
+var PhotosShopController = require('../controllers/photosShop_controller');
 
 /* GET home page. */
 router.get('/', Controller.index);//pagina principal o novedades
@@ -65,6 +66,10 @@ router.get('/result', Controller.busqueda);//Resultados de las busquedas
 
 //Rutas de PhotosSpot
 router.post('/photosSpot/new', SessionController.loginRequired, PhotosSpotController.create);//creacion de foto en Spot
-router.get('/photosSpot/:photosSpotID', PhotosSpotController.show);
+router.get('/photosSpot/:photosSpotID', PhotosSpotController.show);//vista de foto de spot
+
+//Rutas de PhotosShop
+router.post('/photosShop/new', SessionController.loginRequired, PhotosShopController.create);//creacion de foto en shop
+router.get('/photosShop/:photosShopID', PhotosShopController.show);//vista de foto de shop
 
 module.exports = router;//exportamos las rutas 

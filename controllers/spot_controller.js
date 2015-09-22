@@ -89,12 +89,13 @@ exports.update = function(req, res){
 	req.spot.tipo = req.body.spot.tipo;
 	req.spot.lat = req.body.spot.lat;
 	req.spot.lng = req.body.spot.lng;
+	req.spot.image = req.body.spot.image;
 		
 	req.spot.validate().then(function(err){
 		if(err){
 			res.render('spots/edit', {spot:req.spot, errors:err.errors});
 		}else{
-			req.spot.save({fields:["nombre", "ciudad", "descripcion", "tipo", "lat", "lng"]})
+			req.spot.save({fields:["nombre", "ciudad", "descripcion", "tipo", "lat", "lng", "image"]})
 			.then(function(){res.redirect('/spots');});
 		}
 	});

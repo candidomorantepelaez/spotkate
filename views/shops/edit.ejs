@@ -2,12 +2,87 @@
 <form method="post" action="/shop/<%= shop.id %>?_method=put">
 	<label for="nomsh" class="rem">Modifica el nombre:</label>
 	<input type="text" id="nomshedit" name="shop[nombre]" value="<%= shop.nombre %>" required="true" size="60" maxlength="255"/><br>
-	<label for="dirsh" class="rem">Modifica la direccion:</label>
-	<input type="text" id="dirshedit" name="shop[direccion]" value="<%= shop.direccion %>" required="true" size="60" maxlength="255"/><br>
+	<label for="dirsh" class="rem">Modifica la ciudad:</label>
+	<input type="text" id="dirshedit" name="shop[ciudad]" value="<%= shop.ciudad %>" required="true" size="60" maxlength="255"/><br>
 	<label for="dessh" class="rem">Modifica la descripcion:</label>
 	<input type="text" id="desshedit" name="shop[descripcion]" value="<%= shop.descripcion %>" required="true" size="60" maxlength="255"/><br>
-	<label for="crpsh" class="rem">Dinos tu nick:</label>
-	<input type="text" id="crpshedit" name="shop[creado_por]" placeholder="nick..." required="true" size="60" maxlength="255"/><br>
+	<p>Selecciona en el mapa donde esta la shop: </p> 
+    <div id="map" class="mapNewSpot">
+    </div>
+     <input type="text" id="latshop" name="shop[lat]" value="<%= shop.lat %>" require="true" hidden>
+    <input type="text" id="lngshop" name="shop[lng]" value="<%= shop.lng %>" require="true" hidden>
 	<a href="/spots"><button type="button">Cancelar</button></a>
 	<input type="submit" value="Modificar Shop">	
 </form>
+<script type="text/javascript">
+var map;
+    $(document).ready(function(){
+        cargarmap();
+    });
+    function cargarmap(e){       
+      map = new GMaps({
+        el: '#map',
+        lat: 43.5316991,
+        lng: -5.6618833,
+        click: function(e){
+           cargarmap(); 
+           map.addMarker({               
+                lat: e.latLng.lat(),
+                lng: e.latLng.lng()
+           });
+           latshop=e.latLng.lat();
+           lngshop=e.latLng.lng();
+           $('#latshop').attr("value", latshop);
+           $('#lngshop').attr("value", lngshop);           
+        },
+        zoom: 10,
+        zoomControl : true,
+        zoomControlOpt: {
+            style : 'SMALL',
+            position: 'TOP_LEFT'
+        },
+        panControl : true,
+        streetViewControl : true,
+        mapTypeControl: true,
+        overviewMapControl: true        
+      });         
+      map.addControl({
+        position: 'top_right',
+        content: 'Geolocate',
+        style: {
+          margin: '5px',
+          padding: '1px 6px',
+          border: 'solid 1px #717B87',
+          background: '#fff'
+        },
+        events: {
+          click: function(){
+            GMaps.geolocate({
+              success: function(position){
+                map.setCenter(position.coords.latitude, position.coords.longitude);
+              },
+              error: function(error){
+                alert('Geolocation failed: ' + error.message);
+              },
+              not_supported: function(){
+                alert("Your browser does not support geolocation");
+              }
+            });
+          }
+        }
+      });
+      $.get("/maps/spots", function(spots){
+        for(e=0; e< spots.length; e++){       
+            map.addMarker({
+                lat: spots[e].lat,
+                lng: spots[e].lng,
+                title: spots[e].nombre,
+                infoWindow: {
+                    content: '<p>'+spots[e].nombre+'</p><br><a href="spot/'+spots[e].id+'"><img class="photoMap" src="http://res.cloudinary.com/photo-spotkate/image/upload/'+spots[e].image+'"></a>'
+                }
+            });
+        };           
+      });
+      
+    };
+</script>

@@ -15,7 +15,8 @@
 </form>
 <% if(session.user.id===shop.UserId||session.user.isAdmin){ %>
 		<form method="post" action="/photosShop/new" enctype='multipart/form-data'>
-		<input type="text" name="shopId" value="<%= shop.id %>" hidden/>
+		<input type="text" name="UserId" value="<%= session.user.id %>" hidden />
+		<input type="text" name="shopId" value="<%= shop.id %>" hidden />
 		<input type="text" name="nombreShop" value="<%= shop.nombre %>" hidden />
 		<input type="file" name='photo' accept="image/*" required="true">
 		<input type="submit" value="Añadir foto a la tienda"><br>
@@ -32,11 +33,11 @@
 <h2><a href="javascript:history.back()">volver</a></h2>
 <h3>Fotos</h3>
 <ul class="galeria">
-<% var e; for(e=0; e<shop.photosShops.length; e++) { %>
+<% var e; for(e=0; e<shop.photosShops.length; e++) { %>	
 	<li>
 		<a href="#image<%= e %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= shop.photosShops[e].image %>"></a>
 	</li>
-<% } %>
+<% } %>	
 </ul>
 <% var e; for(e=0; e<shop.photosShops.length; e++) { %>
 <div class="modal" id="image<%= e %>">

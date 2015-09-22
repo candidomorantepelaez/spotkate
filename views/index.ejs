@@ -1,4 +1,4 @@
-<h2>Bienvenido a Novedades</h2>
+<h2>Novedades en Spots</h2>
 <ul class="galeria">
 <% var e; for(e=0; e<result.length; e++) { %>
 	<li>
@@ -18,4 +18,23 @@
 	<h4> Foto subida por <%= result[e].creado_por %> el <%= result[e].creado_el %></h4>
 </div>
 <% } %>
-
+<h2>novedades en shops</h2>
+<ul class="galeria">
+<% var i; for(i=0; i<fotospot.length; i++) { %>
+	<li>
+		<a href="#image<%= i %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= fotospot[i].image %>"></a>
+	</li>
+<% } %>
+</ul>
+<% var i; for(i=0; i<fotospot.length; i++) { %>
+<div class="modal" id="image<%= i %>">
+	<h3><%= fotospot[i].nombreShop %></h3>
+	<div class="imagen">
+		<a href="#image<%= i-1 %>">&#60;</a>
+		<a href="#image<%= i+1 %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= fotospot[i].image %>"></a>
+		<a href="#image<%= i+1 %>">></a>
+	</div>
+	<a class="cerrar" href="" >x</a>
+	<h4> Foto subida por <%= fotospot[i].creado_por %> el <%= fotospot[i].creado_el %></h4>
+</div>
+<% } %>

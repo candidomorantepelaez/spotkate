@@ -7,10 +7,15 @@ exports.new = function(req, res){
 
 //POST/shop/:shopsId/comment
 exports.create = function(req, res, next){
+	var hora = new Date();
+	var momento= hora.getDate() + "/" + (hora.getMonth() +1) + "/" + hora.getFullYear()+" a las "+hora.getHours()+":"+hora.getMinutes('mm');
 	var comment = models.CommentShop.build({
 		comentario: req.body.commentShop.texto,
 		creado_por: req.body.commentShop.creado_por,
-		shopId: req.params.shopsId});
+		creado_el: momento,
+		shopId: req.params.shopsId,
+		UserId: req.session.user.id
+	});
 	comment.validate().then(function(err){
 		if(err){
 			res.render('commentShop/new', {comment:comment, errors:err.errors});

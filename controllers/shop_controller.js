@@ -50,11 +50,14 @@ exports.show = function(req, res){
 exports.new = function(req, res){
 	var shop = models.Shops.build({//crea un objeto
 		nombre:'nombre',
-		direccion:'direccion',
+		ciudad:'ciudad',
+		lat:'lat',
+		lng:'lng',
 		descripcion:'descripcion',
 		creado_por:'creado_por',
 		UserId:'UserId',
-		creado_el:'creado_el'
+		creado_el:'creado_el',
+		imagen: 'imagen'
 	});
 	res.render('shops/new', {shop:shop, errors:[]});
 };
@@ -74,7 +77,7 @@ exports.create = function(req, res){
 		if(err){
 			res.render('shops/new', {shop:shop,errors:err.errors});
 		}else{
-		shop.save({fields:["nombre", "ciudad", "descripcion", "creado_por", "UserId", "creado_el","image"]})
+		shop.save({fields:["nombre", "ciudad", "descripcion", "creado_por", "UserId", "creado_el", "image", "lat", "lng"]})
 	.then(function(){
 		res.redirect('/shops');})}
 	});
@@ -87,15 +90,17 @@ exports.edit = function(req, res){
 //PUT/shop/:shopsId
 exports.update = function(req, res){
 	req.shop.nombre = req.body.shop.nombre;
-    req.shop.direccion = req.body.shop.direccion;
+    req.shop.ciudad = req.body.shop.ciudad;
 	req.shop.descripcion = req.body.shop.descripcion;
-	req.shop.creado_por=req.shop.creado_por +", modificada por "+ req.body.shop.creado_por;
-	
+	req.shop.lat = req.body.shop.lat;
+	req.shop.lng = req.body.shop.lng;
+	req.shop.image = req.body.shop.image;
+		
 	req.shop.validate().then(function(err){
 		if(err){
 			res.render('shops/edit', {shop:req.shop, errors:err.errors});
 		}else{
-			req.shop.save({fields:["nombre", "direccion", "descripcion", "creado_por"]})
+			req.shop.save({fields:["nombre", "ciudad", "descripcion", "lat", "lng", "image"]})
 			.then(function(){res.redirect('/shops');});
 		}
 	});
