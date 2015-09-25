@@ -39,17 +39,18 @@
 </ul>
 <% var e; for(e=0; e<spot.photosSpots.length; e++) { %>
 <div class="modal" id="image<%= e %>">
-	<h3><%= spot.nombre %></h3>
+	<h3><a href="/spot/<%= spot.id %>"><%= spot.nombre %></a></h3>
 	<div class="imagen">
 		<a href="#image<%= e-1 %>">&#60;</a>
 		<a href="#image<%= e+1 %>"><img src="http://res.cloudinary.com/photo-spotkate/image/upload/<%= spot.photosSpots[e].image %>"></a>
 		<a href="#image<%= e+1 %>">></a>
 	</div>
 	<a class="cerrar" href="" >x</a>	
-	<h4> Foto subida por <%= spot.photosSpots[e].creado_por %> el <%= spot.photosSpots[e].creado_el %></h4>
+	<h3> Foto subida por <%= spot.photosSpots[e].creado_por %> el <%= spot.photosSpots[e].creado_el %></h3>
 	<% if(session.user){ %>
-		<h4>Añadir Comentario</h4>
+		<h3>Añadir Comentario</h3>
 		<form method="post" action="">
+			<input type="text" id="comPhoSpotid" name="commentPhotoSpot[id]" value="<%= spot.photosSpots[e].id %>" hidden/>
 			<input type="text" id="comPhoSpot" name="commentPhotoSpot[comentario]" placeholder="escribe aqui..."/>
 			<input type="text" name="commentPhotoSpot[creado_por]" value="<%= session.user.username %>" hidden/>
 			<button type="submit">Enviar</button>		

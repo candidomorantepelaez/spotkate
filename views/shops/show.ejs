@@ -52,6 +52,7 @@
 	<% if(session.user){ %>
 		<h4>Añadir Comentario</h4>
 		<form method="post" action="">
+			<input type="text" id="comPhoShopid" name="commentPhotoShop[id]" value="<%= spot.photosSpots[e].id %>" hidden/>
 			<input type="text" id="comPhoShop" name="commentPhotoShop[comentario]" placeholder="escribe aqui..."/>
 			<input type="text" name="commentPhotoShop[creado_por]" value="<%= session.user.username %>" hidden/>
 			<button type="submit">Enviar</button>		
