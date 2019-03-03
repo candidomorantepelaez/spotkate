@@ -10,6 +10,8 @@ var session = require('express-session');
 var fs = require('fs');
 var multipart = require('connect-multiparty');
 var cloudinary = require('cloudinary');
+var env = require('node-env-file');
+env(__dirname + '/.env');
 
 var routes = require('./routes/index');
 
@@ -31,17 +33,17 @@ app.use(cookieParser('Spotkate 2015'));
 app.use(session({
     secret:'cookie secret',
     resave:true,
-    saveUninitialized:true    
+    saveUninitialized:true
 }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Helpers dinamicos:
 app.use(function(req, res, next){
-    
+
     //si no existe lo inicializa
     if(!req.session.redir){req.session.redir='/';}
-    
+
     //guardar path en session.redir para despues de login
     if(!req.path.match(/\/login|\/logout|\/user/)){
         req.session.redir = req.path;
