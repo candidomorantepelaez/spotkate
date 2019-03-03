@@ -11,7 +11,7 @@ var fs = require('fs');
 var multipart = require('connect-multiparty');
 var cloudinary = require('cloudinary');
 var env = require('node-env-file');
-env(__dirname + '/.env');
+// env(__dirname + '/.env');
 
 var routes = require('./routes/index');
 
